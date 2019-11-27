@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Authentication</title>
+    <!--
+    when using thymeleaf, th:href will search under resources/static folder. ( with spring boot)
+    -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="col-6 col-md-6 offset-3 offset-md-3 mt-4">
+    <div class="card text-white bg-info">
+        <div class="card-header">Authentication</div>
+        <div class="card-body">
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label class="col-form-label">Login: </label>
+                    <input class="form-control" type="text" name="username" placeholder="your username">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Password: </label>
+                    <input class="form-control" type="password" name="password" placeholder="your password">
+                </div>
+                <div>
+                    <input class="btn btn-primary" type="submit" value="Login">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
