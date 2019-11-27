@@ -1,0 +1,51 @@
+{
+  "name": "ng4-complete-guide",
+  "version": "1.0.0",
+  "description": "An Angular Seed Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack-dev-server --inline --progress --port 8080 --config webpack.config.dev.js",
+    "build:prod": "del-cli dist && ngc -p tsconfig.aot.json && ngc -p tsconfig.aot.json && webpack --config webpack.config.prod.js --progress --profile --bail && del-cli 'src/app/**/*.js' 'src/app/**/*.ngfactory.ts' 'src/app/**/*.js.map' 'src/app/**/*.shim.ts' 'src/app/**/*.ngsummary.json' 'src/app/**/*.ngstyle.ts' 'dist/app' 'src/polyfills.ngsummary.json'",
+    "serve": "lite-server"
+  },
+  "author": "Maximilian Schwarzmüller",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/animations": "^6.0.0",
+    "@angular/common": "^6.0.0",
+    "@angular/compiler": "^6.0.0",
+    "@angular/compiler-cli": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "@angular/forms": "^6.0.0",
+    "@angular/http": "^6.0.0",
+    "@angular/platform-browser": "^6.0.0",
+    "@angular/platform-browser-dynamic": "^6.0.0",
+    "@angular/platform-server": "^6.0.0",
+    "@angular/router": "^6.0.0",
+    "@angular/upgrade": "^6.0.0",
+    "core-js": "^2.4.1",
+    "rxjs": "6.0.0",
+    "zone.js": "^0.8.5"
+  },
+  "devDependencies": {
+    "@ngtools/webpack": "^1.10.2",
+    "@types/core-js": "0.9.36",
+    "@types/node": "7.0.7",
+    "angular-router-loader": "^0.6.0",
+    "angular2-template-loader": "^0.6.2",
+    "awesome-typescript-loader": "^3.5.0",
+    "css-loader": "^2.1.1",
+    "del-cli": "^0.2.1",
+    "html-loader": "^0.4.5",
+    "html-webpack-plugin": "^3.2.0",
+    "lite-server": "^2.3.0",
+    "raw-loader": "^0.5.1",
+    "to-string-loader": "^1.1.5",
+    "typescript": "2.7.2",
+    "webpack": "4.19.1",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.2"
+  }
+}
