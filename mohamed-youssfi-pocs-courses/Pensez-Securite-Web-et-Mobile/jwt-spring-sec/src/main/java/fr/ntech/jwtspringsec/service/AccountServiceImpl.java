@@ -4,6 +4,7 @@ import fr.ntech.jwtspringsec.entities.AppRole;
 import fr.ntech.jwtspringsec.entities.AppUser;
 import fr.ntech.jwtspringsec.repositories.RoleRepository;
 import fr.ntech.jwtspringsec.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,14 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AccountServiceImpl implements AccountService {
 
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
 
     private final RoleRepository roleRepository;
 
-    public AccountServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
-        this.passwordEncoder = passwordEncoder;
+    public AccountServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
@@ -48,6 +49,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AppUser findUserByUsername(String username) {
-        return null;
+        return userRepository.findByUsername(username);
     }
 }
