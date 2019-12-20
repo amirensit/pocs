@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,7 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.formLogin();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // this tells to spring security to not work with session authentication.
+        // http.formLogin();
         http.authorizeRequests().antMatchers("/login/**", "/register/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/tasks/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
