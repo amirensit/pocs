@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "HelloSchematics",
+    "title": "Hello Options Schema",
+    "type": "object",
+    "description": "Says hello to iheb",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "the name of the person",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            },
+            "x-prompt": "who do we want to greet?"
+        },
+        "secondParam": {
+            "type": "string",
+            "description": "my second param",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            },
+            "x-prompt": "what is your second param?"
+        },
+        "project": {
+            "type": "string",
+            "description": "Generate in specific Angular CLI workspace project"
+        }
+    },
+    "required": [
+        "name"
+    ]
+}
