@@ -1,0 +1,19 @@
+<div class="container" >
+  <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Task Name</th>
+      </tr>
+      </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{task.id}}</td>
+        <td>{{task.taskName}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button (click)="callObservable()" >test</button>
+
+</div>

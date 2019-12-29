@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         } catch (IOException e) {
            throw new RuntimeException(e);
         }
-        log.info("username: {} || password: {}", appUser.getUsername(), appUser.getPassword());
+        log.info("from JwtAuthenticationFilter.attemptAuthentication(): username: {} || password: {}", appUser.getUsername(), appUser.getPassword());
         return authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(appUser.getUsername(), appUser.getPassword())
         );
@@ -52,6 +52,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        log.info("from JwtAuthenticationFilter.successfulAuthentication()");
         User springUser = (User) authResult.getPrincipal();
         String jwtToken= Jwts.builder()
                 .setSubject(springUser.getUsername())
