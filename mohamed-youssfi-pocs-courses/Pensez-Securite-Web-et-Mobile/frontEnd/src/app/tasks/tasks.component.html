@@ -1,7 +1,7 @@
 <div class="container" >
   <p></p>
-  <button class="btn btn-danger" (click)="onNewTask()" >New Task</button>
-  <p></p>
+  <button class="btn btn-danger" (click)="onNewTask()">New Task</button>
+  <p>{{this.loginService.isAdmin()}}</p>
   <table class="table table-striped">
       <thead>
       <tr>

@@ -2,15 +2,17 @@ import {Injectable} from '@angular/core';
 import {HOST} from '../app.constants';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { JwtHelper } from  'angular2-jwt';
+import {Observable} from 'rxjs';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {RoleModel} from '../role.model';
 
 @Injectable(
   {providedIn: 'root'}
 )
 export class JwtService {
 
-  private roles: Array<any>;
+  private roles: RoleModel[];
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -26,10 +28,10 @@ export class JwtService {
         map(authenticateSuccess.bind(this))
       );
   }
-  
+
   saveToken(jwt: string) {
     localStorage.setItem('token', jwt);
-    let jwtHelper = new JwtHelper();
+    const jwtHelper = new JwtHelperService();
     this.roles = jwtHelper.decodeToken(jwt).roles;
   }
 
@@ -41,11 +43,13 @@ export class JwtService {
     return new Observable(observer => {
       localStorage.removeItem('token');
       observer.complete();
-    })
+    });
   }
 
-  isAdmin() {
-
+   getRoles(): Observable<RoleModel[]> {
+    return new Observable<RoleModel[]>((observer) =>
+      observer.next(this.roles)
+    );
   }
 
 }

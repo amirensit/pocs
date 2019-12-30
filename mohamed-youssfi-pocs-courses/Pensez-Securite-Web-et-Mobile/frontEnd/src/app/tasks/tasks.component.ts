@@ -10,7 +10,7 @@ import { LoginService } from '../login/login.service';
 })
 export class TasksComponent implements OnInit {
 
-  constructor(private  tasksService: TasksService, private router: Router, private loginService: LoginService) { }
+  constructor(private tasksService: TasksService, private router: Router, public loginService: LoginService) { }
 
   tasks;
   ngOnInit() {
