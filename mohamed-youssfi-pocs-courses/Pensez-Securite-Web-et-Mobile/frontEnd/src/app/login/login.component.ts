@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
     this.loginService.login(dataForm)
       .subscribe(response => {
         this.router.navigate(['/tasks']);
-
       },
         error => {
           error = true;

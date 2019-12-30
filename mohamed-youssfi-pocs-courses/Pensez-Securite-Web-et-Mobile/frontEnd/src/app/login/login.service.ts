@@ -12,6 +12,10 @@ export class LoginService {
     return this.jwtService.login(user);
   }
 
+  logout() {
+    this.jwtService.logout().subscribe();
+  }
+
 
 }
 

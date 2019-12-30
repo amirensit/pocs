@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TasksService} from './tasks.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-tasks',
@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 })
 export class TasksComponent implements OnInit {
 
-  constructor(private  tasksService: TasksService, private router: Router) { }
+  constructor(private  tasksService: TasksService, private router: Router, private loginService: LoginService) { }
 
   tasks;
   ngOnInit() {
@@ -20,12 +20,13 @@ export class TasksComponent implements OnInit {
       this.tasks = data;
       },
       () => {
+        this.loginService.logout();
         this.router.navigate(['/login']);
       }
     );
   }
 
-  testObservable() {
+  /* testObservable() {
     return new Observable((observer) => {
       observer.next('next method called');
       observer.complete();
@@ -42,6 +43,10 @@ export class TasksComponent implements OnInit {
       }
     }
     );
+  } */
+
+  onNewTask() {
+    this.router.navigate(['/new-task']);
   }
 
 }
