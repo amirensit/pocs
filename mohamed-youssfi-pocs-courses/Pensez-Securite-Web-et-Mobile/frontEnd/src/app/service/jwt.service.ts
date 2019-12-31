@@ -46,10 +46,22 @@ export class JwtService {
     });
   }
 
-   getRoles(): Observable<RoleModel[]> {
+   /* getRoles(): Observable<RoleModel[]> {
     return new Observable<RoleModel[]>((observer) =>
       observer.next(this.roles)
     );
-  }
+  } */
+
+  isAdmin() {
+    if (this.roles) {
+      console.log(this.roles);
+      for (var role of this.roles) {
+        if(role['authority'] === 'ADMIN') {
+          return true;
+        }
+      }
+    }
+     return false;
+    }
 
 }

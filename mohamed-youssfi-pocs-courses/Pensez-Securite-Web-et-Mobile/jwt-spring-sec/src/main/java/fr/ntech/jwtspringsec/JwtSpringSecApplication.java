@@ -34,7 +34,7 @@ public class JwtSpringSecApplication implements CommandLineRunner {
         accountService.saveRole(new AppRole(null, "USER"));
         accountService.addRoleToUser("admin", "ADMIN");
         accountService.addRoleToUser("user", "USER");
-		Stream.of("T1", "T2", "T3").forEach( t -> {
+		Stream.of("T1", "T2", "T3", "T4", "T5").forEach( t -> {
 			taskRepository.save(new Task(null, t));
 		});
 		taskRepository.findAll().forEach( t -> {

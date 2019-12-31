@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TasksService} from './tasks.service';
 import {Router} from '@angular/router';
 import { LoginService } from '../login/login.service';
+import { JwtService } from '../service/jwt.service';
 
 @Component({
   selector: 'app-tasks',
@@ -10,7 +11,7 @@ import { LoginService } from '../login/login.service';
 })
 export class TasksComponent implements OnInit {
 
-  constructor(private tasksService: TasksService, private router: Router, public loginService: LoginService) { }
+  constructor(private tasksService: TasksService, private router: Router, public loginService: LoginService, private jwtService: JwtService) { }
 
   tasks;
   ngOnInit() {
@@ -47,6 +48,10 @@ export class TasksComponent implements OnInit {
 
   onNewTask() {
     this.router.navigate(['/new-task']);
+  }
+
+  isAdmin() {
+    return this.jwtService.isAdmin();
   }
 
 }
