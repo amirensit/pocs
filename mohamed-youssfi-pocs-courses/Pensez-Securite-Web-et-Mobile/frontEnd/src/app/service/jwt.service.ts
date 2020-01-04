@@ -55,13 +55,13 @@ export class JwtService {
   isAdmin() {
     if (this.roles) {
       console.log(this.roles);
-      for (var role of this.roles) {
-        if(role['authority'] === 'ADMIN') {
+      for (const role of this.roles) {
+        if (role.authority === 'ADMIN') {
           return true;
         }
       }
     }
-     return false;
+    return false;
     }
 
 }
