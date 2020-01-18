@@ -1,6 +1,6 @@
 name: My first github actions workflow
 # This workflow is triggered on pushes to the repository.
-on: [commit]
+on: [push]
 
 jobs:
   build:
