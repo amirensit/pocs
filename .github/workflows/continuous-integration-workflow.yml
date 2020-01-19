@@ -28,3 +28,7 @@ jobs:
            FIRST_NAME: Mona
            middle_name: The
            Last_Name: Octocat
+       - name: step-2-in-job-2-showing-how-to-use-secrets
+         run: echo the secret value is $my_secret
+         env:
+           my_secret: ${{secrets.amir_key}}
