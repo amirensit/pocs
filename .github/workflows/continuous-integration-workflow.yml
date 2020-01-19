@@ -3,7 +3,7 @@ name: My first github actions workflow
 on: [push]
 
 jobs:
-  build:
+  job-1:
     # Job name is Greeting
     name: Job1-continious-integration
     # This job runs on Linux
@@ -18,7 +18,7 @@ jobs:
       # This step prints an output (time) from the previous step's action.
       - name: step-2-in-job-1-Echo the greeting's time
         run: echo 'The time was ${{ steps.hello.outputs.time }}.'
- job-2:
+  job-2:
     name: Job-2-continious-integration
     runs-on: ubuntu-latest
     steps:
