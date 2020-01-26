@@ -1,0 +1,7 @@
+server:
+  port: 8081
+spring:
+  data:
+    mongodb:
+      database: mapstruct-mongo
+      uri: mongodb://127.0.0.1:27017
