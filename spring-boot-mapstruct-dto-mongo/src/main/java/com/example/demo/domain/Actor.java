@@ -3,16 +3,25 @@ package com.example.demo.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Document(collection = "actor")
 public class Actor {
 
     @Id
     private String id;
 
+    @Size(min = 3, max = 10)
     private String actorCode;
 
+    @NotNull
     private String firstName;
 
+    @Min(4)
+    @Max(12)
     private String lastName;
 
     public String getId() {
