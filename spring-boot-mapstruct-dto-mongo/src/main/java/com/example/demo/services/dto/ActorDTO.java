@@ -1,15 +1,21 @@
 package com.example.demo.services.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class ActorDTO {
 
     private String id;
 
+    @Size(min = 3, max = 10)
     private String actorCode;
 
     private String firstName;
 
+    @Min(4)
+    @Max(12)
     private String lastName;
 
     public String getId() {

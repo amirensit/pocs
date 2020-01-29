@@ -5,3 +5,6 @@ spring:
     mongodb:
       database: mapstruct-mongo
       uri: mongodb://127.0.0.1:27017
+logging:
+  level:
+    root: debug

@@ -3,7 +3,6 @@ package com.example.demo.services.mapper;
 import com.example.demo.domain.Actor;
 import com.example.demo.services.dto.ActorDTO;
 
-
 import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
