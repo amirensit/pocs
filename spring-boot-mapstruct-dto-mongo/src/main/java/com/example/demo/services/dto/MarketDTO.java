@@ -1,5 +1,8 @@
 package com.example.demo.services.dto;
 
+import com.example.demo.config.validations.OnCreate;
+
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,6 +12,7 @@ public class MarketDTO {
 
     private String marketCode;
 
+    @NotNull(groups = OnCreate.class)
     private String label;
 
     private String adress;

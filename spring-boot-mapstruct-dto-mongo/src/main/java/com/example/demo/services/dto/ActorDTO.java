@@ -1,5 +1,7 @@
 package com.example.demo.services.dto;
 
+import com.example.demo.config.validations.customAnnotations.IpAddress;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -14,9 +16,11 @@ public class ActorDTO {
 
     private String firstName;
 
-    @Min(4)
-    @Max(12)
+    @Size(min = 4, max = 12)
     private String lastName;
+
+    @IpAddress
+    private String ipAddress; // just for testing custom validator annotation
 
     public String getId() {
         return id;
@@ -48,6 +52,14 @@ public class ActorDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
     @Override

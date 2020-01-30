@@ -1,9 +1,11 @@
 package com.example.demo.domain;
 
+import com.example.demo.config.validations.OnCreate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -17,6 +19,7 @@ public class Market implements Serializable {
 
     private String marketCode;
 
+    @NotNull(groups = OnCreate.class) // this means that the label field should not be null in creation. It can be null in other scenarios like edit.
     private String label;
 
     private String adress;

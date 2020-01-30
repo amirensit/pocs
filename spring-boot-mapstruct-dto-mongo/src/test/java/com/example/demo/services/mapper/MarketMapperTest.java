@@ -15,10 +15,7 @@ public class MarketMapperTest {
 
     MarketMapper marketMapper = MarketMapper.INSTANCE;
 
-    @Test
-    public void toDtoTest() throws Exception {
-
-        //given
+    public static Market createMarket() {
         Market market = new Market();
         market.setMarketCode(DEFAULT_MARKET_CODE);
         market.setLabel(DEFAULT_LABEL);
@@ -28,12 +25,24 @@ public class MarketMapperTest {
         actor2.setFirstName("just a new firstName different from actor1");
         market.addAffectedOperator(actor1);
         market.addAffectedOperator(actor2);
+        return market;
+    }
+
+    public static MarketDTO createMarketDTO() {
+        return MarketMapper.INSTANCE.toDto(createMarket());
+    }
+
+    @Test
+    public void toDtoTest() throws Exception {
+
+        //given
+        Market market = createMarket();
 
         //when
         MarketDTO marketDTO = marketMapper.toDto(market);
         ActorDTO actorDTOFromAffectedOperatorsDTO = marketDTO.getAffectedOperators().iterator().next();
-        //then
 
+        //then
         assertThat(marketDTO.getId()).isEqualTo(market.getId());
         assertThat(marketDTO.getAffectedOperators()).size().isEqualTo(2);
         assertThat(actorDTOFromAffectedOperatorsDTO.getFirstName()).isEqualTo("amir");

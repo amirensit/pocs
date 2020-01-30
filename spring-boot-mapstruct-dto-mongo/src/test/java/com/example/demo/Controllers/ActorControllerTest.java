@@ -1,6 +1,8 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.domain.Actor;
+import com.example.demo.services.dto.ActorDTO;
+import com.example.demo.services.mapper.ActorMapper;
 import com.example.demo.services.mapper.ActorMapperTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,9 @@ public class ActorControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private ActorMapper actorMapper;
+
     /*
     this test is used in controllers level.
      */
@@ -30,12 +35,38 @@ public class ActorControllerTest {
     public void whenActorCodeInvalid_thenReturnStatus400() throws Exception {
         Actor actor = ActorMapperTest.createActor();
         actor.setActorCode("ae");
-        String body = objectMapper.writeValueAsString(actor);
+
+        ActorDTO actorDTO = actorMapper.toDTO(actor);
+
+        String body = objectMapper.writeValueAsString(actorDTO);
 
         mockMvc.perform(post("/actors/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body))
                         .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void whenIpAddressInvalid_thenReturnStatus400() throws Exception {
+        /*Throwable exception = assertThrows(Exception.class, () -> {
+            Actor actor = ActorMapperTest.createActor();
+            actor.setIpAddress("333.333.333..2251");
+            String body = objectMapper.writeValueAsString(actor);
+            mockMvc.perform(post("/actors/add")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(body))
+                    .andExpect(status().isBadRequest());
+        });
+        assertEquals(exception.getMessage(), "IpAddress.invalid");*/
+
+        Actor actor = ActorMapperTest.createActor();
+        actor.setIpAddress("333.333.333..2251");
+        String body = objectMapper.writeValueAsString(actor);
+        mockMvc.perform(post("/actors/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body))
+                .andExpect(status().isBadRequest());
+
     }
 
 }

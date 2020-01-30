@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.example.demo.config.validations.customAnnotations.IpAddress;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,9 +21,11 @@ public class Actor {
     @NotNull
     private String firstName;
 
-    @Min(4)
-    @Max(12)
+    @Size(min = 4, max = 12)
     private String lastName;
+
+    @IpAddress
+    private String ipAddress; // just for testing custom validator annotation
 
     public String getId() {
         return id;
@@ -56,6 +59,14 @@ public class Actor {
         this.lastName = lastName;
     }
 
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -78,6 +89,7 @@ public class Actor {
                 "actorCode='" + actorCode + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
                 '}';
     }
 }
