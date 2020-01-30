@@ -20,7 +20,7 @@ import java.util.Set;
 * In order to to this, we use a combination of the @Validated and @Valid annotations.
  */
 @Service
- @Validated // Note that we have to add Spring’s @Validated annotation to the service at class level to tell Spring to evaluate the constraint annotations on method parameters
+@Validated // Note that we have to add Spring’s @Validated annotation to the service at class level to tell Spring to evaluate the constraint annotations on method parameters
 public class ActorService {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -45,7 +45,8 @@ public class ActorService {
     }
 
     /*
-    * This method is used to validate constraints in service layer. This will trigger an exception that will not be translated by `DefaultHandlerExceptionResolver`.
+    * This method is used to validate constraints in service layer.
+    * This will trigger an exception that will not be translated by `DefaultHandlerExceptionResolver`.
     * At integration test, we can expect exceptions. This is not the case in controllers layer.
      */
     public ActorDTO validateAndSave(@Valid ActorDTO actorDTO) {
