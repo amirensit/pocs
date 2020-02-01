@@ -1,4 +1,4 @@
-name: "Pull Request Labeler" # this name will be shown on the sidebar.
+name: Pull Request Labeler # this name will be shown on the sidebar.
 on:
   - pull_request
 jobs:
