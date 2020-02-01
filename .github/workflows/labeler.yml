@@ -1,4 +1,3 @@
-# the labeler action uses a configuration file that must be named labeler.yml under .github folder.
 name: "Pull Request Labeler" # this name will be shown on the sidebar.
 on:
   - pull_request
