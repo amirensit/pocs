@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { STEP_ITEMS } from './steps-config';
 
 @Component({
   selector: 'app-orders',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor() { }
+  formContent: any;
+  formData: any;
+  activeStepIndex: number;
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.formContent = STEP_ITEMS;
+    this.formData = {};
   }
 
+  onFormSubmit(formData: any): void {
+    this.formData = formData;
+
+    // post form data here
+    alert(JSON.stringify(this.formData));
+  }
+  
 }
