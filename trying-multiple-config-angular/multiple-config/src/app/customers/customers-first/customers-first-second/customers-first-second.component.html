@@ -1,1 +1,26 @@
-<p>customers-first-second works!</p>
+<form [formGroup]="usersForm" (ngSubmit)="onSubmit()">
+    <ng-container *ngFor="let userFormGroup of usersForm.controls.users.controls; let i = index">
+      <div [formGroup]="userFormGroup">
+        <label>
+          First name:
+          <input type="text" formControlName="firstName">
+        </label>
+        <label>
+          Last name:
+          <input type="text" formControlName="lastName">
+        </label>
+        <label>
+          Email:
+          <input type="text" formControlName="email">
+        </label>
+        <hr/>
+        <label>
+            <button (click)="removeFormControl(i)">remove formGroup</button>
+          </label>
+      </div>
+    </ng-container>
+      <hr/>
+    <button type="submit">console log form value</button>
+    <hr/>
+    <button (click)="addFormControl()">add new user formGroup</button>
+  </form>
