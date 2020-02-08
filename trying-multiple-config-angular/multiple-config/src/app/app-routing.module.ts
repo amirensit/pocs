@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { Page404Component } from './page404/page404.component';
 
 
 const routes: Routes = [
@@ -12,11 +13,17 @@ const routes: Routes = [
     path: 'orders',
     loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) 
   },
-
+/*
+I didn't get why this route is used, but It seems we need to put this here as mentioned in the official docs
+*/
   {
     path: '',
     redirectTo: '',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: Page404Component
   }
 ];
 

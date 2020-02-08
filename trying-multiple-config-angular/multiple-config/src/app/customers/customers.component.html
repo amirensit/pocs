@@ -1,2 +1,13 @@
-<p>customers works!</p>
-{{ afterChunk }}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Customers</h5>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="'customers-first'" routerLinkActive="active"> customers-first </a>
+            </li>
+        </ul>
+        <p class="card-text">
+            <router-outlet></router-outlet>
+        </p>
+    </div>
+</div>

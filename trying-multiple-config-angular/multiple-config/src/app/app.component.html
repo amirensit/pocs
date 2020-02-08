@@ -1,6 +1,13 @@
-{{title}}
-<hr/>
-<button routerLink="/customers">Customers</button>
-<button routerLink="/orders">Orders</button>
-<button routerLink="">Home</button>
-<router-outlet></router-outlet>
+
+<div class="card">
+    <div class="card-body">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" [routerLink]="'/customers'" routerLinkActive="active"> Customers </a>
+        <a class="navbar-brand" routerLink="/orders" routerLinkActive="active"> orders </a>
+        <a class="navbar-brand" [routerLink]="" routerLinkActive="active"> Home </a>
+      </nav>
+      <p class="card-text">
+        <router-outlet></router-outlet>
+      </p>
+    </div>
+  </div>
