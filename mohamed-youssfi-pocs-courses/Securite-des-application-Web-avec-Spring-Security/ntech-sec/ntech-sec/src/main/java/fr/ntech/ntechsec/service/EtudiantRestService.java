@@ -35,7 +35,7 @@ public class EtudiantRestService {
 
     @Secured(value = {"ROLE_ADMIN", "ROLE_SCOLARITE", "ROLE_PROF", "ROLE_ETUDIANT"})
     @RequestMapping(value = "/etudiants")
-    public Page<Etudiant> listEtudiant(int page, int size) {
+    public Page<Etudiant> listEtudiant(int page, int size) { // we can omit @RequestParam annotation if is a simple type. The method param name will be used by default. See https://reversecoding.net/spring-mvc-requestparam-binding-request-parameters/
         return etudiantRepository.findAll(PageRequest.of(page, size)); // new PageRequest(page, size) is deprecated.
     }
 
