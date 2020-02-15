@@ -27,7 +27,6 @@ jobs:
         run: |
           cd ./trying-multiple-config-angular/multiple-config
           npm ci
-          npm i redis
 
       - name: Connect to Redis
         # Runs a script that creates a Redis client, populates
