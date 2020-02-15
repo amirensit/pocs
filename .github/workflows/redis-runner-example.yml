@@ -25,7 +25,9 @@ jobs:
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd ./trying-multiple-config-angular/multiple-config
+          npm ci
 
       - name: Connect to Redis
         # Runs a script that creates a Redis client, populates
