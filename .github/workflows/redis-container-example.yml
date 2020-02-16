@@ -31,7 +31,9 @@ jobs:
       - name: Connect to Redis
         # Runs a script that creates a Redis client, populates
         # the client with data, and retrieves data
-        run: node ./.github/scripts/client.js
+        run: |
+          docker container ls
+          node ./.github/scripts/client.js
         # Environment variable used by the `client.js` script to create a new Redis client.
         env:
           # The hostname used to communicate with the Redis service container
