@@ -14,7 +14,7 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index() {
         return "index";
 
