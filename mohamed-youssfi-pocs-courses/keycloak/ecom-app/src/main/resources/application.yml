@@ -7,3 +7,4 @@ keycloak:
   resource: products-app
   public-client: true
   confidential-port: 0
+  principal-attribute: name
