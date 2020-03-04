@@ -1,4 +1,4 @@
-package org.amirensit.pocs.ecomapp.config;
+package org.amirensit.supplierservice.config;
 
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +14,4 @@ public class KeycloakConfig {
     public KeycloakSpringBootConfigResolver keycloakSpringBootConfigResolver () {
         return new KeycloakSpringBootConfigResolver();
     }
-
-
 }

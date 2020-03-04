@@ -1,0 +1,9 @@
+server:
+  port: 8083
+keycloak:
+  realm: ecom-realm
+  auth-server-url: http://localhost:8080/auth/
+  ssl-required: external
+  resource: products-app # this field is required. We need to keep that value. Here we not protecting a public client, but we are protecting a service. We will use bearer only authentication.
+  public-client: false # this must be false for services.
+  bearer-only: true # This should be set to true for services.
