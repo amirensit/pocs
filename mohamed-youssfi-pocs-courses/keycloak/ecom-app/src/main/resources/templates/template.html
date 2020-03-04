@@ -30,18 +30,21 @@
                 <a class="nav-link" href="#">Suppliers</a>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
-            <li class="nav-item dropdown">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <span sec:authentication="name"/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Logout</a>
-                    <a class="dropdown-item" href="#">Change password</a>
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                    <a class="dropdown-item" href="/changePassword">Change password</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
+            </li>
+            <li class="nav-item" sec:authorize="isAnonymous()">
+                <a class="nav-link" href="/sso/login" >Login</a>
             </li>
         </ul>
     </div>
