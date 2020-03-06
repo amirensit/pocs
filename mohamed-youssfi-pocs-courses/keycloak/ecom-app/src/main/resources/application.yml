@@ -4,7 +4,7 @@ keycloak:
   realm: ecom-realm
   auth-server-url: http://localhost:8080/auth/
   ssl-required: external
-  resource: products-app
+  resource: products-app #this will be used as a client-id parameter in case we will interrogate with keycloak server.
   public-client: true
   confidential-port: 0
   principal-attribute: name
