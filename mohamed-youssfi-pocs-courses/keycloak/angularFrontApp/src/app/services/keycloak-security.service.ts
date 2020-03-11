@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { KeycloakInstance } from 'keycloak-js';
 
 @Injectable({
   providedIn: 'root'
