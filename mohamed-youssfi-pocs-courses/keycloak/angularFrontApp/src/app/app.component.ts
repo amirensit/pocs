@@ -9,11 +9,11 @@ import { KeycloakSecurityService } from './services/keycloak-security.service';
 export class AppComponent implements OnInit {
   title = 'angularFrontApp';
 
-  constructor(public securityService: KeycloakSecurityService) {
+  constructor(public ksService: KeycloakSecurityService) {
 
   }
 
   ngOnInit() {
-
+    console.log(this.ksService.kc.tokenParsed);
   }
 }
