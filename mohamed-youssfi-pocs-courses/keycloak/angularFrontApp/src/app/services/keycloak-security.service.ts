@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { KeycloakInstance } from 'keycloak-js';
 
-declare let keycloak: any; // we need to use this line due to javascript code compilation error.
+declare var Keycloak: any; // we need to use this line due to javascript code compilation error. (with capital K and not k :p)
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +11,22 @@ export class KeycloakSecurityService {
   public kc: KeycloakInstance; // public scope in order to be used anywhere in the app.
   constructor() { }
 
-  init() {
+  async init() {
     console.log('Security Initialisation');
-    this.kc = new keycloak({
+    this.kc = new Keycloak({
       url: "http://localhost:8080/auth",
       realm: "ecom-realm",
-      client_id: "AngularProductsApp"
+      clientId: "AngularProductsApp"
     });
+
+    await this.kc.init({
+      onLoad: 'check-sso',
+      promiseType: 'native' // due to problem with some deprecated promises, we need to add this line.
+    });
+    console.log(this.kc.token);
+  }
+
+  public isManager(): boolean {
+    return this.kc.hasResourceRole('appManager');
   }
 }
