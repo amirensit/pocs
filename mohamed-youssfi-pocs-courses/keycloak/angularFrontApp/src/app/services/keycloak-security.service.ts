@@ -11,7 +11,7 @@ export class KeycloakSecurityService {
 
   constructor() { }
 
-  async init() {
+   async init() {
     console.log('Security Initialisation');
     this.kc = new Keycloak({
       url: "http://localhost:8080/auth/",
@@ -25,7 +25,4 @@ export class KeycloakSecurityService {
     });
   }
 
-  public isManager(): boolean {
-    return this.kc.hasResourceRole('appManager');
-  }
 }

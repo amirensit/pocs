@@ -16,4 +16,20 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     console.log(this.ksService.kc.tokenParsed);
   }
+
+  onLogin() {
+    this.ksService.kc.login();
+  }
+
+  onLogout() {
+    this.ksService.kc.logout();
+  }
+
+  onChangePassword() {
+    this.ksService.kc.accountManagement();
+  }
+
+  isAppManager() {
+    return this.ksService.kc.hasRealmRole("app-manager");
+  }
 }

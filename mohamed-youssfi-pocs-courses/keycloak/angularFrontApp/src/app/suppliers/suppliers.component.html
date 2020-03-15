@@ -1,1 +1,15 @@
-<p>suppliers works!</p>
+<div class="text-danger" *ngIf="errorMsg" >
+    {{errorMsg}}
+</div>
+<table class="table" *ngIf="suppliers" >
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    <tr *ngFor="let supplier of suppliers._embedded.suppliers" >
+        <td>{{ supplier.id }}</td>
+        <td>{{ supplier.name }}</td>
+        <td>{{ supplier.email }}</td>
+    </tr>
+</table>
