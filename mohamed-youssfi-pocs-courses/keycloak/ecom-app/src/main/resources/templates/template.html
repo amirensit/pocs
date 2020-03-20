@@ -31,7 +31,7 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()"> <!--If we need to verify against a specific authority, we can use: sec:authorize="hasAuthority('authorityName')"-->
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <span sec:authentication="name"/>
