@@ -9,7 +9,7 @@ import { SuppliersService } from '../services/suppliers.service';
 export class SuppliersComponent implements OnInit {
 
   suppliers;
-  errormsg;
+  errorMsg;
   constructor(private supplierService: SuppliersService) { }
 
   ngOnInit(): void {
@@ -18,7 +18,7 @@ export class SuppliersComponent implements OnInit {
         this.suppliers = data; 
       },
       error => {
-        this.errormsg = error.error.message
+        this.errorMsg = error.error.message
       }
     )
   }

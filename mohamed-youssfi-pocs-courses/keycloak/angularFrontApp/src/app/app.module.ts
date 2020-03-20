@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, DoBootstrap, ApplicationRef } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,11 @@ import { RequestInterceptorService } from './services/request-interceptor.servic
 function keycloakFactory(keycloakSecurity: KeycloakSecurityService) {
   return () => keycloakSecurity.init()
 }
+
+/*
+this is an other alternative for using APP_INITIALIZER provider using DoBootstrap interface.
+*/
+const keyCloakService = new KeycloakSecurityService();
 
 @NgModule({
   declarations: [
@@ -26,8 +31,26 @@ function keycloakFactory(keycloakSecurity: KeycloakSecurityService) {
   providers: [
     // this will start the init method of KeycloakSecurityService using the APP_INITIALIZER. There is other way using the main.ts file
     { provide: APP_INITIALIZER, deps: [KeycloakSecurityService], useFactory: keycloakFactory, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService,  multi: true}
+    // { provide: keyCloakService, useValue: keyCloakService }, // useValue for an insantiated class and useClass for a declared class.
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // entryComponents: [ AppComponent ]
 })
 export class AppModule { }
+
+/* export class AppModule implements DoBootstrap {
+  ngDoBootstrap(appRef: ApplicationRef): void {
+    keyCloakService.init()
+      .then(
+        (authenticated) => {
+          if (authenticated) appRef.bootstrap(AppComponent);
+        }
+      )
+      .catch(
+        (error) => console.log(error)
+      )
+  }
+}
+  */
+

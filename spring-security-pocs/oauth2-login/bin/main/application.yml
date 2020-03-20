@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+
+spring:
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 978033845884-dlo7ulg97dphpa8ogck00d1fivddb8pu.apps.googleusercontent.com
+            client-secret: w_Bu2V8qP-vhqoAUzVm8oCbh
+          github:
+            client-id: 27e8e8c512c63b94d1b4
+            client-secret: 180c1b7b798704812c3fbae376d3b70258d1def0
+          okta:
+            client-id: 0oau69impCSY3qqkP4x5
+            client-secret: y6qA4OOACsEA8r2CZe2WC2oP37bw6Khi-O2cPUag
+        provider:
+          okta:
+            authorization-uri: https://dev-798493.okta.com/oauth2/v1/authorize
+            token-uri: https://dev-798493.okta.com/oauth2/v1/token
+            user-info-uri: https://dev-798493.okta.com/oauth2/v1/userinfo
+            user-name-attribute: sub
+            jwk-set-uri: https://dev-798493.okta.com/oauth2/v1/keys
