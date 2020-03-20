@@ -7,17 +7,20 @@ import { KeycloakSecurityService } from './keycloak-security.service';
 })
 export class SuppliersService {
 
-  constructor(private httpClient: HttpClient, 
+  constructor(private httpClient: HttpClient,
     private keycloakService: KeycloakSecurityService) { }
 
   getSuppliers() {
-    return this.httpClient.get("http://localhost:8083/suppliers",
-    {
-      headers: new HttpHeaders({
-      Authorization: 'Bearer ' + this.keycloakService.kc.token
-    }
-    )
-  }
+    return this.httpClient.get("http://localhost:8083/suppliers"
+    /*
+    the code commented below is replaced by the RequestInterceptorService
+     */
+     /*  ,
+      {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + this.keycloakService.kc.token
+        })
+      } */
     )
   }
 }
