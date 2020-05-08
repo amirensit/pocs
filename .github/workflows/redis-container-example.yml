@@ -1,46 +1,56 @@
-name: Redis container example
-on: push
+name: Redis Service Example
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
 
 jobs:
-  # Label of the container job
   container-job:
-    # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
-    # Docker Hub image that `container-job` executes in
-    container: node:10.18-jessie
 
-    # Service containers to run with `container-job`
+    container:
+      image:  node:10.18-jessie
+
     services:
-      # Label used to access the service container
       redis:
-        # Docker Hub image
         image: redis
-        # Set health checks to wait until redis has started
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        ports:
+        - 6379:6379
 
     steps:
-      # Downloads a copy of the code in your repository before running CI tests
-      - name: Check out repository code
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      # Performs a clean installation of all dependencies in the `package.json` file
-      # For more information, see https://docs.npmjs.com/cli/ci.html
-      - name: Install dependencies
-        run: npm ci
-        working-directory: ././trying-multiple-config-angular/multiple-config
+    - run: npm ci # N.B: we need to run npm ci on redis folder to download redis dependency !!!
+      working-directory: ./redis
 
-      - name: Connect to Redis
-        # Runs a script that creates a Redis client, populates
-        # the client with data, and retrieves data
-        run: |
-          node ./.github/scripts/client.js
-        # Environment variable used by the `client.js` script to create a new Redis client.
-        env:
-          # The hostname used to communicate with the Redis service container
-          REDIS_HOST: redis
-          # The default Redis port
-          REDIS_PORT: 6379
+    - run: node client.js
+      working-directory: ./redis
+      env:
+        REDIS_HOST: redis
+        REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+
+  vm-job:
+    runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis
+        ports:
+        - 6379/tcp
+        options: --entrypoint redis-server
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: npm ci
+      working-directory: ./redis
+
+    - run: node client.js
+      working-directory: ./redis
+      env:
+        REDIS_HOST: localhost
+        REDIS_PORT: ${{ job.services.redis.ports[6379] }}
