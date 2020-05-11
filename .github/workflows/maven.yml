@@ -16,3 +16,23 @@ jobs:
     # - name: Build with Maven
     #  run: mvn -B package --file pom.xml
 
+  my_hello_world_job: # this job uses my custom github action. (my-hello-world-docker-action folder)
+    runs-on: ubuntu-latest
+    name: A job to say hello using a custom github action that I create
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: set chmod for entrypoint file
+        run: chmod +x ./my-hello-world-docker-action/entrypoint.sh
+
+      - name: hello world
+        id: hello
+        uses: ./my-hello-world-docker-action
+        with:
+          who-to-greet: 'Mona the Octocat'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+
