@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: billing-service
+  datasource:
+    url: jdbc:h2:mem:billing-db
+  cloud:
+    discovery:
+      enabled: true
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+server:
+  port: 8083
+
