@@ -1,1 +1,78 @@
-<p>products works!</p>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="navbar navbar-nav">
+    <li>
+      <button (click)="ongetAllProducts()"
+              class="btn btn-sm btn-outline-info ml-2">All</button>
+    </li>
+
+    <li>
+      <button (click)="ongetSelectedProducts()"
+              class="btn btn-sm btn-outline-info ml-2">Selected</button>
+    </li>
+
+    <li>
+      <button (click)="ongetAvailableProducts()"
+              class="btn btn-sm btn-outline-info ml-2">Available</button>
+    </li>
+
+    <li>
+      <button (click)="onNewProduct()"
+              class="btn btn-sm btn-outline-info ml-2">New</button>
+    </li>
+  </ul>
+  <ul class="navbar navbar-nav ml-auto" >
+    <li>
+      <form class="form-inline" #f="ngForm" (ngSubmit)="onSearch(f.value)" novalidate>
+          <input ngModel name="keyword" type="text"  />
+          <button class="btn btn-sm btn-outline-info ml-2">
+            <span class="fa fa-search"></span>
+          </button>
+      </form>
+    </li>
+  </ul>
+</nav>
+<div class="container">
+  <ng-container *ngIf="(products$ | async) as result" [ngSwitch]="result.appDataState">
+    <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+      Loading...
+    </ng-container>
+
+    <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>PRICE</th>
+          <th>QUANTITY</th>
+          <th>SELECTED</th>
+          <th>AVAILABLE</th>
+        </tr>
+        <tr *ngFor="let p of result.data">
+          <td> {{ p.id }} </td>
+          <td> {{ p.name }} </td>
+          <td> {{ p.price }} </td>
+          <td> {{ p.quantity }} </td>
+          <td> {{ p.selected }} </td>
+          <td> {{ p.available }} </td>
+          <td>
+            <button (click)="onSelect(p)" [ngClass]="p.selected ? 'btn-success' : 'btn-danger'" class="btn btn-sm" >
+              <span *ngIf="p.selected" >Unselect</span>
+              <span *ngIf="!p.selected" >Select</span>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="onDeleteProduct(p)" >
+              <span class="fa fa-trash-o" ></span>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+      <div class="alert-danger">
+        {{ result.errorMessage }}
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
