@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductAddComponent } from './components/products/product-add/product-add.component';
+import { ProductEditComponent } from './components/products/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProductAddComponent } from './components/products/product-add/product-a
     NavBarComponent,
     ProductsComponent,
     HomeComponent,
-    ProductAddComponent
+    ProductAddComponent,
+    ProductEditComponent
   ],
   imports: [
     BrowserModule,

@@ -69,4 +69,8 @@ export class ProductsComponent implements OnInit {
   onNewProduct() {
     this.router.navigate(['/newProduct']);
   }
+
+  onEditProduct(product: Product) {
+    this.router.navigate(['/editProduct', product.id]);
+  }
 }

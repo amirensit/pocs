@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "computer",
-      "prix": 4300,
+      "price": 120,
       "quantity": 120,
       "selected": false,
       "available": true
@@ -11,18 +11,18 @@
     {
       "id": 2,
       "name": "Printer",
-      "prix": 1100,
+      "price": 20,
       "quantity": 200,
       "selected": true,
       "available": true
     },
     {
-      "id": 3,
-      "name": "smartphone",
-      "prix": 1100,
-      "quantity": 200,
-      "selected": false,
-      "available": true
+      "name": "test",
+      "price": 23,
+      "quantity": 23,
+      "selected": true,
+      "available": true,
+      "id": 4
     }
   ]
 }
