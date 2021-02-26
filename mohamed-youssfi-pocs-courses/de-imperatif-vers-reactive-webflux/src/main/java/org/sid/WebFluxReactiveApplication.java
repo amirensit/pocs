@@ -33,7 +33,7 @@ public class WebFluxReactiveApplication {
                                 societie -> {
                                     Transaction transaction = new Transaction();
                                     transaction.setInstant(Instant.now());
-                                    transaction.setSocietie(societie);
+                                    transaction.setSocietieId(societie.getId());
                                     transaction.setPrice(3.5);
                                     transactionRepository.save(transaction)
                                             .subscribe(

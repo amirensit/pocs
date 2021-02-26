@@ -17,7 +17,5 @@ public class Transaction {
     private String id;
     private Instant instant;
     private double price;
-    @JsonIgnore // similar as @JsonIgnore
-    @DBRef
-    private Societie societie;
+    private String societieId;
 }

@@ -32,7 +32,13 @@ public class TransactionReactiveController {
 
     @GetMapping("/transactions/{id}")
     public Mono<Transaction> findOne(@PathVariable String id) {
-        return transactionRepository.findById(id);
+        return transactionRepository.findById(id)
+                .flatMap(transaction ->
+                        Mono.just(transaction).zipWith(societieRepository.findById(transaction.getSocietieId()),
+                                (t, s) -> {
+                            t.setS
+                                }
+                        ));
     }
 
     @PostMapping("/transactions")
