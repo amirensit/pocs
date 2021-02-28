@@ -36,7 +36,8 @@ public class TransactionReactiveController {
                 .flatMap(transaction ->
                         Mono.just(transaction).zipWith(societieRepository.findById(transaction.getSocietieId()),
                                 (t, s) -> {
-                            t.setS
+                                    t.setSocietie(s);
+                                    return t;
                                 }
                         ));
     }
