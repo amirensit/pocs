@@ -1,11 +1,15 @@
 package org.sid.web;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.sid.dao.SocietieRepository;
 import org.sid.dao.TransactionRepository;
 import org.sid.entities.Societie;
 import org.sid.entities.Transaction;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -84,5 +88,24 @@ public class TransactionReactiveController {
             return Flux.zip(interval, transactionFlux)
                     .map(data -> data.getT2());
         });
+    }
+
+    @GetMapping(value = "/events/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Event> getEvents(@PathVariable String id) { // we are going to get data from other microservice
+        WebClient webClient = WebClient.create("http://localhost");
+        Flux<Event> eventFlux = webClient.get()
+                .uri("streamEvents/" + id)
+                .retrieve()
+                .bodyToFlux(Event.class);
+        return eventFlux;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    static class Event {
+        private Instant instant;
+        private double value;
+        private String societeId;
     }
 }
