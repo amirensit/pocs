@@ -92,9 +92,9 @@ public class TransactionReactiveController {
 
     @GetMapping(value = "/events/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Event> getEvents(@PathVariable String id) { // we are going to get data from other microservice
-        WebClient webClient = WebClient.create("http://localhost");
+        WebClient webClient = WebClient.create("http://localhost:8081");
         Flux<Event> eventFlux = webClient.get()
-                .uri("streamEvents/" + id)
+                .uri("/streamEvents/" + id)
                 .retrieve()
                 .bodyToFlux(Event.class);
         return eventFlux;

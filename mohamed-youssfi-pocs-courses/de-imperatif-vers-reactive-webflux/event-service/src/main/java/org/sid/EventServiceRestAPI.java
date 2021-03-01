@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 @RestController
 public class EventServiceRestAPI {
 
-    @GetMapping(value = "/streamEvents/{id}", produces = MediaType.APPLICATION_STREAM_JSON_VALUE) // this mediatype is deprecated. trying APPLICATION_NDJSON does not work.
+    @GetMapping(value = "/streamEvents/{id}", produces = MediaType.APPLICATION_NDJSON_VALUE) // APPLICATION_STREAM_JSON_VALUE is deprecated.
     public Flux<Event> listEvents(@PathVariable String id) {
         Flux<Long> interval = Flux.interval(Duration.ofMillis(1000)); // every second
         Flux<Event> events = Flux.fromStream(Stream.generate(() -> {
