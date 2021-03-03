@@ -87,7 +87,7 @@ public class TransactionReactiveController {
             transaction.setSocietie(societie);
             transaction.setPrice(3.5);
             return Flux.just(transaction);
-        });
+        }).share(); // share function means all subscribers share the same value
     }
 
     @GetMapping(value = "/events/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
