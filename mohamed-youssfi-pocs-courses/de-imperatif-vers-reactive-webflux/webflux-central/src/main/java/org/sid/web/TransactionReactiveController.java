@@ -67,16 +67,9 @@ public class TransactionReactiveController {
         return transactionRepository.findAll();
     }
 
-    @GetMapping(value = "/transactionsBySc")
-    public Flux<Transaction> transactionsBySociete(@PathVariable String id) {
-        Societie societie = new Societie();
-        societie.setId(id);
-        return transactionRepository.findBySocietie(societie);
-    }
-
     @GetMapping(value = "/streamTransactionsBySc", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Transaction> streamTransactionsBySociete(@PathVariable String id) {
-        return societieRepository.findById(id).flatMapMany(societie -> {
+        /*return societieRepository.findById(id).flatMapMany(societie -> {
             Flux<Long> interval = Flux.interval(Duration.ofMillis(1000));
             Flux<Transaction> transactionFlux = Flux.fromStream(Stream.generate(() -> {
                 Transaction transaction = new Transaction();
@@ -87,6 +80,13 @@ public class TransactionReactiveController {
             }));
             return Flux.zip(interval, transactionFlux)
                     .map(data -> data.getT2());
+        });*/
+        return societieRepository.findById(id).flatMapMany(societie -> {
+            Transaction transaction = new Transaction();
+            transaction.setInstant(Instant.now());
+            transaction.setSocietie(societie);
+            transaction.setPrice(3.5);
+            return Flux.just(transaction);
         });
     }
 

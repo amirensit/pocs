@@ -7,5 +7,5 @@ import reactor.core.publisher.Flux;
 
 public interface TransactionRepository extends ReactiveMongoRepository<Transaction, String> {
 
-    public Flux<Transaction> findBySocietie(Societie societie);
+    public Flux<Transaction> findBySocietieId(String societieId);
 }

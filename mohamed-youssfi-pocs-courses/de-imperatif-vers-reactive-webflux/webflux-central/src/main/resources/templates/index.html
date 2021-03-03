@@ -1,19 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Page Title</title>
-</head>
-<body>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>PRICE</th>
-    </tr>
-    <tr th:each="s : ">
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Page Title</title>
+        <!--Bootstrap CSS-->
+        <link th:rel="stylesheet"
+              th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}"/>
+        <!--Bootstrap JS-->
+        <script th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+    </head>
+    <body>
+        <p>Liste des sociétés</p>
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>PRICE</th>
+                </tr>
+                <tr th:each="s : ${societes}">
+                    <td th:text="${s.id}"></td>
+                    <td th:text="${s.name}"></td>
+                    <td th:text="${s.price}"></td>
+                    <td>
+                        <button
+                            class="btn btn-primary"
+                            th:attr="onclick=|onConnect('${s.id}')|"> Transaction</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <script th:src="@{/js/app.js}">
 
-    </tr>
-</table>
-</body>
+    </script>
+    </body>
 </html>
