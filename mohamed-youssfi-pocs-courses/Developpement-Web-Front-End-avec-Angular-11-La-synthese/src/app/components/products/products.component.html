@@ -1,52 +1,7 @@
-<app-products-nav-bar (productEventEmitter)="onActionEvent($event)"></app-products-nav-bar>
-<div class="container">
-  <ng-container *ngIf="(products$ | async) as result" [ngSwitch]="result.appDataState">
-    <ng-container *ngSwitchCase="DataStateEnum.LOADING">
-      Loading...
-    </ng-container>
+<app-products-nav-bar (productEventEmitter)="onActionEvent($event)">
 
-    <ng-container *ngSwitchCase="DataStateEnum.LOADED">
-      <table class="table">
-        <tr>
-          <th>ID</th>
-          <th>NAME</th>
-          <th>PRICE</th>
-          <th>QUANTITY</th>
-          <th>SELECTED</th>
-          <th>AVAILABLE</th>
-        </tr>
-        <tr *ngFor="let p of result.data">
-          <td> {{ p.id }} </td>
-          <td> {{ p.name }} </td>
-          <td> {{ p.price }} </td>
-          <td> {{ p.quantity }} </td>
-          <td> {{ p.selected }} </td>
-          <td> {{ p.available }} </td>
-          <td>
-            <button (click)="onSelect(p)" [ngClass]="p.selected ? 'btn-success' : 'btn-danger'" class="btn btn-sm" >
-              <span *ngIf="p.selected" >Unselect</span>
-              <span *ngIf="!p.selected" >Select</span>
-            </button>
-          </td>
-          <td>
-            <button class="btn btn-danger" (click)="onDeleteProduct(p)" >
-              <span class="fa fa-trash-o" ></span>
-            </button>
-          </td>
+</app-products-nav-bar>
 
-          <td>
-            <button class="btn btn-danger" (click)="onEditProduct(p)" >
-              <span class="fa fa-edit" ></span>
-            </button>
-          </td>
-        </tr>
-      </table>
-    </ng-container>
+<app-products-list [productsInput$]="products$" (productsEventEmitter) ="onActionEvent($event)">
 
-    <ng-container *ngSwitchCase="DataStateEnum.ERROR">
-      <div class="alert-danger">
-        {{ result.errorMessage }}
-      </div>
-    </ng-container>
-  </ng-container>
-</div>
+</app-products-list>

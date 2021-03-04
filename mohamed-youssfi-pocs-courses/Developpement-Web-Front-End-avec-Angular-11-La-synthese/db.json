@@ -11,18 +11,10 @@
     {
       "id": 2,
       "name": "Printer",
-      "price": 20,
+      "price": 22,
       "quantity": 200,
       "selected": true,
       "available": true
-    },
-    {
-      "name": "test",
-      "price": 23,
-      "quantity": 23,
-      "selected": true,
-      "available": true,
-      "id": 4
     }
   ]
 }

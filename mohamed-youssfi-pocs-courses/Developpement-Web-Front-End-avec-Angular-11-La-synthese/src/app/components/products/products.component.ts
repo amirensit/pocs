@@ -39,6 +39,15 @@ export class ProductsComponent implements OnInit {
       case ProductActionsTypes.NEW_PRODUCT:
         this.onNewProduct();
         break;
+        case ProductActionsTypes.SELECT_PRODUCT:
+          this.onSelect(event.payload);
+          break;
+        case ProductActionsTypes.EDIT_PRODUCT:
+          this.onEditProduct(event.payload);
+          break;
+        case ProductActionsTypes.DELETE_PRODUCT:
+          this.onDeleteProduct(event.payload);
+          break;
 
     }
   }
