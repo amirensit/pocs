@@ -1,36 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-  <ul class="navbar navbar-nav">
-    <li>
-      <button (click)="ongetAllProducts()"
-              class="btn btn-sm btn-outline-info ml-2">All</button>
-    </li>
-
-    <li>
-      <button (click)="ongetSelectedProducts()"
-              class="btn btn-sm btn-outline-info ml-2">Selected</button>
-    </li>
-
-    <li>
-      <button (click)="ongetAvailableProducts()"
-              class="btn btn-sm btn-outline-info ml-2">Available</button>
-    </li>
-
-    <li>
-      <button (click)="onNewProduct()"
-              class="btn btn-sm btn-outline-info ml-2">New</button>
-    </li>
-  </ul>
-  <ul class="navbar navbar-nav ml-auto" >
-    <li>
-      <form class="form-inline" #f="ngForm" (ngSubmit)="onSearch(f.value)" novalidate>
-          <input ngModel name="keyword" type="text"  />
-          <button class="btn btn-sm btn-outline-info ml-2">
-            <span class="fa fa-search"></span>
-          </button>
-      </form>
-    </li>
-  </ul>
-</nav>
+<app-products-nav-bar (productEventEmitter)="onActionEvent($event)"></app-products-nav-bar>
 <div class="container">
   <ng-container *ngIf="(products$ | async) as result" [ngSwitch]="result.appDataState">
     <ng-container *ngSwitchCase="DataStateEnum.LOADING">

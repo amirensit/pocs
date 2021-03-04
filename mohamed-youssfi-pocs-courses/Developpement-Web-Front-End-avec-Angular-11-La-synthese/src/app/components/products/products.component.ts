@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ProductsService } from 'src/app/services/products.service';
 import { catchError, map, startWith } from 'rxjs/operators';
-import { AppDataState, DataStateEnum } from 'src/app/state/product.state';
+import { ActionEvent, AppDataState, DataStateEnum, ProductActionsTypes } from 'src/app/state/product.state';
 import { Product } from 'src/app/models/product.model';
 import { Router } from '@angular/router';
 
@@ -20,6 +20,27 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  onActionEvent(event: ActionEvent) {
+    switch (event.type) {
+      case ProductActionsTypes.GET_ALL_PRODUCTS:
+        this.ongetAllProducts();
+        break;
+      case ProductActionsTypes.GET_SELECTED_PRODUCTS:
+        this.ongetSelectedProducts();
+        break;
+      case ProductActionsTypes.GET_AVAILABLE_PRODUCTS:
+        this.ongetAvailableProducts();
+        break;
+      case ProductActionsTypes.SEARCH_PRODUCTS:
+        this.onSearch(event.payload);
+        break;
+      case ProductActionsTypes.NEW_PRODUCT:
+        this.onNewProduct();
+        break;
+
+    }
   }
 
   ongetAllProducts() {
