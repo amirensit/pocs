@@ -1,0 +1,16 @@
+<div class="p-2" *ngIf="state">
+  <table class="table">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Selected</th>
+      <th>Available</th>
+    </tr>
+    <app-product-item
+    *ngFor="let product of state.products"
+    [product]="product"
+    style="display: contents;">
+  </app-product-item>
+  </table>
+</div>

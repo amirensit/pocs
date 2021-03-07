@@ -1,3 +1,4 @@
+import { Action } from "@ngrx/store";
 import { Product } from "../model/product.model";
 import { GetAllProductsAction, ProductsActions, ProductsActionsTypes } from "./products.actions";
 
@@ -20,7 +21,7 @@ const initState: ProductsState = {
   dataState: ProductsStateEnum.INITIAL
 }
 
-export function productsReducer(state: ProductsState = initState, action: ProductsActions): ProductsState {
+export function productsReducer(state: ProductsState = initState, action: Action): ProductsState {
   switch(action.type) {
     case ProductsActionsTypes.GET_ALL_PRODUCTS:
       return {
@@ -31,14 +32,31 @@ export function productsReducer(state: ProductsState = initState, action: Produc
       return {
         ...state,
         dataState: ProductsStateEnum.LOADED,
-        products: action.payload
+        products: (<ProductsActions>action).payload
       }
-      case ProductsActionsTypes.GET_ALL_PRODUCTS_ERROR:
-        return {
-          ...state,
-          dataState: ProductsStateEnum.ERROR,
-          products: action.payload
-        }
+    case ProductsActionsTypes.GET_ALL_PRODUCTS_ERROR:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.ERROR,
+        errorMsg: (action as ProductsActions).payload
+      }
+    case ProductsActionsTypes.GET_SELECTED_PRODUCTS:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.LOADING
+      }
+    case ProductsActionsTypes.GET_SELECTED_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.LOADED,
+        products: (<ProductsActions>action).payload
+      }
+    case ProductsActionsTypes.GET_SELECTED_PRODUCTS_ERROR:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.ERROR,
+        errorMsg: (action as ProductsActions).payload
+      }
     default:
       return {...state}
   }
