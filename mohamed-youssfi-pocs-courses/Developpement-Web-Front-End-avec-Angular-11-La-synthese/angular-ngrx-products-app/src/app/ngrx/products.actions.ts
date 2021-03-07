@@ -1,4 +1,5 @@
 import { Action } from "@ngrx/store";
+import { Product } from "../model/product.model";
 
 export enum ProductsActionsTypes {
   GET_ALL_PRODUCTS = "[Product] get all products",
@@ -16,7 +17,7 @@ export class GetAllProductsAction implements Action {
 export class GetAllProductsActionSuccess implements Action {
   type: ProductsActionsTypes = ProductsActionsTypes.GET_ALL_PRODUCTS_SUCCESS;
 
-  constructor(public payload: any) { }
+  constructor(public payload: Product[]) { }
 
 }
 
@@ -26,4 +27,6 @@ export class GetAllProductsActionError implements Action {
   constructor(public payload: string) { }
 
 }
+
+export type ProductsActions = GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError
 
