@@ -1,0 +1,4 @@
+transaction_id,account_number,transaction_date,transaction_type,transaction_amount
+540300,283653,17/10/1994-09:44,D,453,434
+144300,244667,17/02/1995-09:55,C,1000,456
+530330,277753,17/10/1994-03:33,C,345,4
