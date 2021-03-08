@@ -1,1 +1,5 @@
 inputFile: classpath:/data.csv
+spring:
+  batch:
+    job:
+      enabled: false
