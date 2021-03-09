@@ -8,17 +8,21 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.batch.item.support.CompositeItemProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableBatchProcessing
@@ -26,34 +30,31 @@ public class BatchConfig {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
-    private final ItemReader<BankTransaction> itemReader;
-    private final ItemWriter<BankTransaction> itemWriter;
-    private final ItemProcessor<BankTransaction, BankTransaction> itemProcessor;
     private final BankTransactionRepository bankTransactionRepository;
+    @Value("${inputFile}")
+    private Resource inputFile;
 
     public BatchConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
-                       ItemReader<BankTransaction> itemReader, ItemWriter<BankTransaction> itemWriter,
-                       ItemProcessor<BankTransaction, BankTransaction> itemProcessor, BankTransactionRepository bankTransactionRepository) {
+                       BankTransactionRepository bankTransactionRepository) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
-        this.itemReader = itemReader;
-        this.itemWriter = itemWriter;
-        this.itemProcessor = itemProcessor;
         this.bankTransactionRepository = bankTransactionRepository;
     }
 
+    @Bean
     public Job BankJob() {
         Step step1 = stepBuilderFactory.get("step-load-data") // name of step
                 .<BankTransaction, BankTransaction>chunk(100)
-                .reader(itemReader)
-                .processor(itemProcessor)
-                .writer(itemWriter)
+                .reader(itemReader(inputFile))
+               // .processor(bankTransactionItemProcessor()) // the old one: only one itemProcessor
+                .processor(bankCompositeItemProcessor()) // list of itemProcessor
+                .writer(bankTransactionItemWriter())
                 .build();
         return jobBuilderFactory.get("job-load-data").start(step1).build();
     }
 
     @Bean
-    public FlatFileItemReader<BankTransaction> itemReader(@Value("${inputFile}") Resource inputFile) {
+    public FlatFileItemReader<BankTransaction> itemReader(Resource inputFile) {
         FlatFileItemReader<BankTransaction> flatFileItemReader = new FlatFileItemReader<>();
         flatFileItemReader.setName("flat-file-item-reader");
         flatFileItemReader.setLinesToSkip(1);
@@ -69,19 +70,33 @@ public class BatchConfig {
         lineTokenizer.setStrict(false);
         lineTokenizer.setNames("id", "accountId", "strTransactionDate", "transactionType", "amount");
         lineMapper.setLineTokenizer(lineTokenizer);
-        BeanWrapperFieldSetMapper fieldSetMapper = new BeanWrapperFieldSetMapper();
+        BeanWrapperFieldSetMapper<BankTransaction> fieldSetMapper = new BeanWrapperFieldSetMapper<BankTransaction>();
         fieldSetMapper.setTargetType(BankTransaction.class);
         lineMapper.setFieldSetMapper(fieldSetMapper);
         return lineMapper;
     }
 
     @Bean
-    public ItemProcessor bankTransactionItemProcessor() {
+    public BankItemProcessor bankTransactionItemProcessor() {
         return new BankItemProcessor();
     }
 
     @Bean
-    public ItemWriter bankTransactionItemWriter() {
+    public BankAnalyticItemProcessor bankTransactionAnalyticItemProcessor() {
+        return new BankAnalyticItemProcessor();
+    }
+
+    @Bean
+    public CompositeItemProcessor<BankTransaction, BankTransaction> bankCompositeItemProcessor() {
+        List<ItemProcessor<BankTransaction, BankTransaction>> itemProcessors = new ArrayList<>();
+        itemProcessors.addAll(Arrays.asList(bankTransactionItemProcessor(), bankTransactionAnalyticItemProcessor()));
+        CompositeItemProcessor<BankTransaction, BankTransaction> compositeItemProcessor = new CompositeItemProcessor<>();
+        compositeItemProcessor.setDelegates(itemProcessors);
+        return compositeItemProcessor;
+    }
+
+    @Bean
+    public ItemWriter<BankTransaction> bankTransactionItemWriter() {
         return new BankItemWriter(bankTransactionRepository);
     }
 }
