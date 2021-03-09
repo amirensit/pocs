@@ -1,6 +1,6 @@
 1- de l'impératif vers le réactif- à partir part 4 (done)
 2- ngrx angular la synthèse (done)
-3- Batch proccessing avec spring batch
+3- Batch proccessing avec spring batch (done)
 4- Big Data Processing && kafka
 
 apprendre reactjs 
