@@ -22,7 +22,7 @@ public class ConsumerApp {
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<>(properties);
-        kafkaConsumer.subscribe(Collections.singletonList("test-1")); // name of topics to subscribe
+        kafkaConsumer.subscribe(Collections.singletonList("test1")); // name of topics to subscribe
         Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> {
             System.out.println("----------");
             ConsumerRecords<String, String> consumerRecords = kafkaConsumer.poll(Duration.ofMillis(10)); // vitesse of consumption: read messages during the last 100 ms
