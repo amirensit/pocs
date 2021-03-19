@@ -29,7 +29,7 @@ public class MyController {
         pageEvent.setPage(page);
         pageEvent.setDate(LocalDate.now());
         pageEvent.setDuration(new Random().nextInt(1000));
-        kafkaTemplate.send(topic, String.valueOf(pageEvent.getPage()), pageEvent);
+        kafkaTemplate.send(topic, pageEvent.getPage(), pageEvent);
         return "sending message ...";
     }
 }
