@@ -34,7 +34,7 @@ public class KafkaStreamProducerPoc {
                 message += " " + characters.get(new Random().nextInt(characters.size())); // space separated characters
             }
             kafkaProducer.send(new ProducerRecord<>("topic-for-streams", null, message),
-                    (metadata, exception) -> System.out.println("sended message: " + message + "\\n with information: "
+                    (metadata, exception) -> System.out.println("sended message: " + message + " with information: "
                             + metadata.topic()));
         }, 1000, 1000, TimeUnit.MILLISECONDS);
     }
