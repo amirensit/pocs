@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+    <div layout:fragment="content" >
+        <span class="text-danger">
+            <h3 th:text="${errorMessage}">error authentication</h3>
+        </span>
+    </div>
+</body>
+</html>
