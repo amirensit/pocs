@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.util.Random;
 
+/**
+ * This class is used as kafka producer
+ */
 @RestController
 public class PageEventRestController {
 
