@@ -4,11 +4,13 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Grouped;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.kstream.TimeWindows;
 import org.sid.demospringcloudstreamskafka.entities.PageEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.function.Consumer;
@@ -20,6 +22,7 @@ import java.util.function.Supplier;
  */
 @Service
 public class PageEventConfiguration {
+
 
     /**
      * by default in spring cloud stream the name of topic is the name of this method.
@@ -61,8 +64,8 @@ public class PageEventConfiguration {
                     .filter((k, v) -> v.getDuration() > 100)
                     .map((k, v) -> new KeyValue<>(v.getName(), 0L))
                     .groupBy((k, v) -> k, Grouped.with(Serdes.String(), Serdes.Long()))
-                    .windowedBy(TimeWindows.of(5000)) // just collect event that was produced during the last 5 seconds
-                    .count()
+                    .windowedBy(TimeWindows.of(Duration.ofMillis(5000))) // just collect event that was produced during the last 5 seconds
+                    .count(Materialized.as("page-count"))// persist the result of count in a store called 'page-count'
                     .toStream()
                     .map((k, v) -> new KeyValue<>("->" + k.window().startTime() +
                             k.window().endTime() + ": " + k.key(), v));
