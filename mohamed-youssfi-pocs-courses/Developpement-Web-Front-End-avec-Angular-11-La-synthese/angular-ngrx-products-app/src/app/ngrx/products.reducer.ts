@@ -57,6 +57,23 @@ export function productsReducer(state: ProductsState = initState, action: Action
         dataState: ProductsStateEnum.ERROR,
         errorMsg: (action as ProductsActions).payload
       }
+    case ProductsActionsTypes.SEARCH_PRODUCTS:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.LOADING
+      }
+    case ProductsActionsTypes.SEARCH_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.LOADED,
+        products: (<ProductsActions>action).payload
+      }
+    case ProductsActionsTypes.SEARCH_PRODUCTS_ERROR:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.ERROR,
+        errorMsg: (action as ProductsActions).payload
+      }
     default:
       return {...state}
   }

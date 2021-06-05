@@ -10,7 +10,12 @@ export enum ProductsActionsTypes {
   // get selected products
   GET_SELECTED_PRODUCTS = "[Product] get selected products",
   GET_SELECTED_PRODUCTS_SUCCESS = "[Product] get selected products success",
-  GET_SELECTED_PRODUCTS_ERROR = "[Product] get selected products error"
+  GET_SELECTED_PRODUCTS_ERROR = "[Product] get selected products error",
+
+  // Search products
+  SEARCH_PRODUCTS = "[Product] Search products",
+  SEARCH_PRODUCTS_SUCCESS = "[Product] Search products success",
+  SEARCH_PRODUCTS_ERROR = "[Product] Search products error"
 }
 
 // get products actions
@@ -52,7 +57,27 @@ export class GetSelectedProductsActionError implements Action {
   constructor(public payload: string) { }
 }
 
+// search products actions
+export class SearchProductsAction implements Action {
+  type: ProductsActionsTypes = ProductsActionsTypes.SEARCH_PRODUCTS;
+
+  constructor(public payload: string) { }
+}
+
+export class SearchProductsActionSuccess implements Action {
+  type: ProductsActionsTypes = ProductsActionsTypes.SEARCH_PRODUCTS_SUCCESS;
+
+  constructor(public payload: Product[]) { }
+}
+
+export class SearchProductsActionError implements Action {
+  type: ProductsActionsTypes = ProductsActionsTypes.SEARCH_PRODUCTS_ERROR;
+
+  constructor(public payload: string) { }
+}
+
 export type ProductsActions =
  GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError |
- GetSelectedProductsAction | GetSelectedProductsActionSuccess | GetSelectedProductsActionError
+ GetSelectedProductsAction | GetSelectedProductsActionSuccess | GetSelectedProductsActionError |
+ SearchProductsAction | SearchProductsActionSuccess | SearchProductsActionError
 
