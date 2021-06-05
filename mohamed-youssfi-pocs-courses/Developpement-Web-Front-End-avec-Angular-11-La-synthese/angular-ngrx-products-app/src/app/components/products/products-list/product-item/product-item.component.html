@@ -2,6 +2,22 @@
   <td>{{ product.id }}</td>
   <td>{{ product.name }}</td>
   <td>{{ product.price }}</td>
-  <td>{{ product.selected }}</td>
+  <td>
+    <span [ngClass] = "product.selected ? 'fa fa-check-circle text-success' : ''">
+
+    </span>
+  </td>
   <td>{{ product.available }}</td>
+  <td>
+    <button [ngClass]="!product.selected ? 'btn-success' : 'btn-danger'"
+            class="btn btn-sm btn-success"
+            (click)="onSelect(product)">
+      <span *ngIf="product.selected">
+        Unselect
+      </span>
+      <span *ngIf="!product.selected">
+        Select
+      </span>
+    </button>
+  </td>
 </tr>
