@@ -6,7 +6,9 @@ export enum ProductsStateEnum {
   LOADING = "Loading",
   LOADED = "Loaded",
   ERROR = "Error",
-  INITIAL = "Initial"
+  INITIAL = "Initial",
+  NEW = "New",
+  EDIT = "Edit"
 }
 
 export interface ProductsState {
@@ -119,6 +121,43 @@ export function productsReducer(state: ProductsState = initState, action: Action
         dataState: ProductsStateEnum.ERROR,
         errorMsg: (action as ProductsActions).payload
       }
+    case ProductsActionsTypes.NEW_PRODUCT:
+    return {
+      ...state,
+      dataState: ProductsStateEnum.LOADING
+    }
+    case ProductsActionsTypes.NEW_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.NEW,
+      }
+    case ProductsActionsTypes.NEW_PRODUCT_ERROR:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.ERROR,
+        errorMsg: (action as ProductsActions).payload
+      }
+      case ProductsActionsTypes.SAVE_PRODUCT:
+        return {
+          ...state,
+          dataState: ProductsStateEnum.LOADING
+      }
+      case ProductsActionsTypes.SAVE_PRODUCT_SUCCESS:
+       {
+         let listProducts = [...state.products];
+         listProducts.push((action as ProductsActions).payload)
+        return {
+          ...state,
+          products: listProducts,
+          dataState: ProductsStateEnum.LOADED,
+        }
+      }
+      case ProductsActionsTypes.SAVE_PRODUCT_ERROR:
+        return {
+          ...state,
+          dataState: ProductsStateEnum.ERROR,
+          errorMsg: (action as ProductsActions).payload
+        }
     default:
       return {...state}
   }

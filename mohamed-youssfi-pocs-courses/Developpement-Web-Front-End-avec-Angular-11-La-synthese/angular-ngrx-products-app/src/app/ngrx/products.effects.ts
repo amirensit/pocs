@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ProductService } from "../services/product.service";
-import { DeleteProductActionError, DeleteProductActionSuccess, GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, ProductsActions, ProductsActionsTypes, SearchProductsActionSuccess, SelectProductActionError, SelectProductActionSuccess } from "./products.actions";
+import { DeleteProductActionError, DeleteProductActionSuccess, GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, NewProductActionSuccess, ProductsActions, ProductsActionsTypes, SaveProductActionError, SaveProductActionSuccess, SearchProductsActionSuccess, SelectProductActionError, SelectProductActionSuccess } from "./products.actions";
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { Action } from "@ngrx/store";
 import { Product } from "../model/product.model";
@@ -75,5 +75,24 @@ export class ProductsEffects {
   )
   );
 
+  newProductEffect = createEffect(() =>
+  this.effectActions.pipe(
+    ofType(ProductsActionsTypes.NEW_PRODUCT),
+    map(
+      (action: ProductsActions) => new NewProductActionSuccess({}))
+  )
+  );
+
+  saveProductEffect = createEffect(() =>
+  this.effectActions.pipe(
+    ofType(ProductsActionsTypes.SAVE_PRODUCT),
+    mergeMap(
+      (action: ProductsActions) => this.productsService.save(action.payload).pipe(
+      map((product: Product) => new SaveProductActionSuccess(product)),
+      catchError(err => of(new SaveProductActionError(err.message)))
+    )
+    )
+  )
+  );
 
 }

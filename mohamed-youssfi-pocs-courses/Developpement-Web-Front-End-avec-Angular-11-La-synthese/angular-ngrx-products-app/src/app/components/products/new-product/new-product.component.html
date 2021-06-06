@@ -1,1 +1,45 @@
-<p>new-product works!</p>
+<div class="container">
+  <ng-container *ngIf="productFormGroup">
+    <ng-container *ngIf="state as data">
+      <ng-container *ngIf="data.dataState == ProductsStateEnum.LOADING">
+        Loading...
+      </ng-container>
+      <ng-container *ngIf="data.dataState == ProductsStateEnum.LOADED">
+        <div class="alert-success container p-3 m-3">
+          <span>Product Saved Successfully</span>
+          <button class="btn btn-success ml-3 btn-sm" (click)="onNewProduct()">
+            New Product
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="data.dataState == ProductsStateEnum.NEW">
+        <form [formGroup]="productFormGroup" (ngSubmit)="onSaveProduct()">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input name="name" type="text" class="form-control" formControlName="name" id="name"/>
+            <div  *ngIf="submitted && fields?.name?.errors"
+                  class="invalid-feedback"
+                  [ngClass]="{'is-invalid': submitted && fields?.name?.errors}">
+              <div *ngIf="fields?.name?.errors?.required">
+                Name is Required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input name="price" type="text" class="form-control" formControlName="price" id="price"/>
+          </div>
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input name="quantity" type="text" class="form-control" formControlName="quantity" id="quantity"/>
+          </div>
+          <div class="form-group">
+            <label for="selected">Selected</label>
+            <input name="selected" type="checkbox" class="form-control" formControlName="selected" id="selected"/>
+          </div>
+          <button type="submit" class="btn btn-success">Save</button>
+        </form>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
