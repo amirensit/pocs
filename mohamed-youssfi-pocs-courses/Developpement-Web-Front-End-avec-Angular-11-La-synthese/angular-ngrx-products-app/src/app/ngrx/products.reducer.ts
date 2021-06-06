@@ -79,7 +79,7 @@ export function productsReducer(state: ProductsState = initState, action: Action
         ...state,
         dataState: ProductsStateEnum.LOADING
       }
-    case ProductsActionsTypes.SELECT_PRODUCT_SUCCESS:
+    case ProductsActionsTypes.SELECT_PRODUCT_SUCCESS: { // case clauses inside switch blocks don't create their own block scopes
       let product: Product = (action as ProductsActions).payload;
       let listProducts = [...state.products];
       let data =  listProducts.map(p =>
@@ -91,7 +91,29 @@ export function productsReducer(state: ProductsState = initState, action: Action
         products: data,
         dataState: ProductsStateEnum.LOADED,
       }
+    }
     case ProductsActionsTypes.SELECT_PRODUCT_ERROR:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.ERROR,
+        errorMsg: (action as ProductsActions).payload
+      }
+    case ProductsActionsTypes.DELETE_PRODUCT:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.LOADING
+      }
+    case ProductsActionsTypes.DELETE_PRODUCT_SUCCESS:
+      let product: Product = (action as ProductsActions).payload;
+      let listProducts = [...state.products];
+      let index = listProducts.indexOf(product);
+      listProducts.splice(index, 1);
+        return {
+          ...state,
+          products: listProducts,
+          dataState: ProductsStateEnum.LOADED,
+        }
+    case ProductsActionsTypes.DELETE_PRODUCT_ERROR:
       return {
         ...state,
         dataState: ProductsStateEnum.ERROR,

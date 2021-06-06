@@ -15,14 +15,6 @@
       "quantity": 10,
       "selected": true,
       "available": false
-    },
-    {
-      "id": 3,
-      "name": "Smartphone",
-      "price": 2000,
-      "quantity": 32,
-      "selected": false,
-      "available": true
     }
   ]
 }
