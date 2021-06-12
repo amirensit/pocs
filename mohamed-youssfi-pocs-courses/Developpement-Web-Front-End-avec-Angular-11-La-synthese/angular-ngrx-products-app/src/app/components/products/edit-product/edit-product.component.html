@@ -6,15 +6,16 @@
       </ng-container>
       <ng-container *ngIf="data.dataState == ProductsStateEnum.LOADED">
         <div class="alert-success container p-3 m-3">
-          <span>Product Saved Successfully</span>
-          <button class="btn btn-success ml-3 btn-sm" (click)="onNewProduct()">
+          <span>Product Updated Successfully</span>
+          <!-- <button class="btn btn-success ml-3 btn-sm" (click)="onNewProduct()">
             New Product
-          </button>
+          </button> -->
         </div>
       </ng-container>
-      <ng-container *ngIf="data.dataState == ProductsStateEnum.NEW">
-        <form [formGroup]="productFormGroup" (ngSubmit)="onSaveProduct()">
+      <ng-container *ngIf="data.dataState == ProductsStateEnum.EDIT">
+        <form [formGroup]="productFormGroup" (ngSubmit)="onEditProduct()">
           <div class="form-group">
+            <input type="hidden" name="id" />
             <label for="name">Name</label>
             <input name="name" type="text" class="form-control" formControlName="name" id="name"/>
             <div  *ngIf="submitted && fields?.name?.errors"
@@ -37,7 +38,7 @@
             <label for="selected">Selected</label>
             <input name="selected" type="checkbox" class="form-control" formControlName="selected" id="selected"/>
           </div>
-          <button type="submit" class="btn btn-success">Save</button>
+          <button type="submit" class="btn btn-success">Edit</button>
         </form>
       </ng-container>
     </ng-container>

@@ -41,6 +41,11 @@ export enum ProductsActionsTypes {
   EDIT_PRODUCT = "[Product] Edit product",
   EDIT_PRODUCT_SUCCESS = "[Product] Edit product success",
   EDIT_PRODUCT_ERROR = "[Product] Edit product error",
+
+  // Update product
+  UPDATE_PRODUCT = "[Product] Update product",
+  UPDATE_PRODUCT_SUCCESS = "[Product] Update product success",
+  UPDATE_PRODUCT_ERROR = "[Product] Update product error",
 }
 
 // get products actions
@@ -196,6 +201,25 @@ export class EditProductActionError implements Action {
   constructor(public payload: string) { }
 }
 
+//  Update product actions
+export class UpdateProductAction implements Action {
+  type: ProductsActionsTypes = ProductsActionsTypes.UPDATE_PRODUCT;
+
+  constructor(public payload: Number) { }
+}
+
+export class UpdateProductActionSuccess implements Action {
+  type: ProductsActionsTypes = ProductsActionsTypes.UPDATE_PRODUCT_SUCCESS;
+
+  constructor(public payload: Product) { }
+}
+
+export class UpdateProductActionError implements Action {
+  type: ProductsActionsTypes = ProductsActionsTypes.UPDATE_PRODUCT_ERROR;
+
+  constructor(public payload: string) { }
+}
+
 export type ProductsActions =
  GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError |
  GetSelectedProductsAction | GetSelectedProductsActionSuccess | GetSelectedProductsActionError |
@@ -204,5 +228,6 @@ export type ProductsActions =
  DeleteProductAction | DeleteProductActionSuccess | DeleteProductActionError |
  NewProductAction | NewProductActionSuccess | NewProductActionError |
  SaveProductAction | SaveProductActionSuccess | SaveProductActionError |
- EditProductAction | EditProductActionSuccess | EditProductActionError
+ EditProductAction | EditProductActionSuccess | EditProductActionError |
+ UpdateProductAction | UpdateProductActionSuccess | UpdateProductActionError
 

@@ -89,7 +89,6 @@ export function productsReducer(state: ProductsState = initState, action: Action
       let data =  listProducts.map(p =>
           p.id == product.id ? product : p
         );
-
       return {
         ...state,
         products: data,
@@ -170,10 +169,33 @@ export function productsReducer(state: ProductsState = initState, action: Action
         return {
           ...state,
           currentProduct: (action as ProductsActions).payload,
-          dataState: ProductsStateEnum.LOADED,
+          dataState: ProductsStateEnum.EDIT,
         }
       }
       case ProductsActionsTypes.EDIT_PRODUCT_ERROR:
+        return {
+          ...state,
+          dataState: ProductsStateEnum.ERROR,
+          errorMsg: (action as ProductsActions).payload
+        }
+        case ProductsActionsTypes.UPDATE_PRODUCT:
+        return {
+          ...state,
+          dataState: ProductsStateEnum.LOADING
+      }
+      case ProductsActionsTypes.UPDATE_PRODUCT_SUCCESS:
+        {
+          let product = (action as ProductsActions).payload;
+          let data =  state.products.map(p =>
+            p.id == product.id ? product : p
+          );
+        return {
+          ...state,
+          products: data,
+          dataState: ProductsStateEnum.LOADED,
+        }
+      }
+      case ProductsActionsTypes.UPDATE_PRODUCT_ERROR:
         return {
           ...state,
           dataState: ProductsStateEnum.ERROR,

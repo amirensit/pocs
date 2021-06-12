@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ProductService } from "../services/product.service";
-import { DeleteProductActionError, DeleteProductActionSuccess, EditProductActionError, EditProductActionSuccess, GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, NewProductActionSuccess, ProductsActions, ProductsActionsTypes, SaveProductActionError, SaveProductActionSuccess, SearchProductsActionSuccess, SelectProductActionError, SelectProductActionSuccess } from "./products.actions";
+import { DeleteProductActionError, DeleteProductActionSuccess, EditProductActionError, EditProductActionSuccess, GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, NewProductActionSuccess, ProductsActions, ProductsActionsTypes, SaveProductActionError, SaveProductActionSuccess, SearchProductsActionSuccess, SelectProductActionError, SelectProductActionSuccess, UpdateProductActionError, UpdateProductActionSuccess } from "./products.actions";
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { Action } from "@ngrx/store";
 import { Product } from "../model/product.model";
@@ -102,6 +102,18 @@ export class ProductsEffects {
       (action: ProductsActions) => this.productsService.getProductById(action.payload).pipe(
       map((product: Product) => new EditProductActionSuccess(product)),
       catchError(err => of(new EditProductActionError(err.message)))
+    )
+    )
+  )
+  );
+
+  UpdateProductEffect = createEffect(() =>
+  this.effectActions.pipe(
+    ofType(ProductsActionsTypes.UPDATE_PRODUCT),
+    mergeMap(
+      (action: ProductsActions) => this.productsService.update(action.payload).pipe(
+      map((product: Product) => new UpdateProductActionSuccess(product)),
+      catchError(err => of(new UpdateProductActionError(err.message)))
     )
     )
   )

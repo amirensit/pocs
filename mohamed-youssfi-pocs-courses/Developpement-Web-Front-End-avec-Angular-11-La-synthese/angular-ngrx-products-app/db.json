@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "name": "Computer",
+      "name": "Computerr",
       "price": 60000,
       "quantity": 12,
       "selected": true,
