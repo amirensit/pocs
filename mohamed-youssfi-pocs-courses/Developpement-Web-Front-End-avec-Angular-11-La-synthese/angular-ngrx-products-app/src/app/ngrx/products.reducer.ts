@@ -14,13 +14,15 @@ export enum ProductsStateEnum {
 export interface ProductsState {
   products: Product[],
   errorMsg: string,
-  dataState: ProductsStateEnum
+  dataState: ProductsStateEnum,
+  currentProduct: Product | null // we need this attribute in case of edit
 }
 
 const initState: ProductsState = {
   products: [],
   errorMsg: '',
-  dataState: ProductsStateEnum.INITIAL
+  dataState: ProductsStateEnum.INITIAL,
+  currentProduct: null
 }
 
 export function productsReducer(state: ProductsState = initState, action: Action): ProductsState {
@@ -137,28 +139,47 @@ export function productsReducer(state: ProductsState = initState, action: Action
         dataState: ProductsStateEnum.ERROR,
         errorMsg: (action as ProductsActions).payload
       }
-      case ProductsActionsTypes.SAVE_PRODUCT:
+    case ProductsActionsTypes.SAVE_PRODUCT:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.LOADING
+    }
+    case ProductsActionsTypes.SAVE_PRODUCT_SUCCESS:
+      {
+        let listProducts = [...state.products];
+        listProducts.push((action as ProductsActions).payload)
+      return {
+        ...state,
+        products: listProducts,
+        dataState: ProductsStateEnum.LOADED,
+      }
+    }
+    case ProductsActionsTypes.SAVE_PRODUCT_ERROR:
+      return {
+        ...state,
+        dataState: ProductsStateEnum.ERROR,
+        errorMsg: (action as ProductsActions).payload
+      }
+      case ProductsActionsTypes.EDIT_PRODUCT:
         return {
           ...state,
           dataState: ProductsStateEnum.LOADING
       }
-      case ProductsActionsTypes.SAVE_PRODUCT_SUCCESS:
-       {
-         let listProducts = [...state.products];
-         listProducts.push((action as ProductsActions).payload)
+      case ProductsActionsTypes.EDIT_PRODUCT_SUCCESS:
+        {
         return {
           ...state,
-          products: listProducts,
+          currentProduct: (action as ProductsActions).payload,
           dataState: ProductsStateEnum.LOADED,
         }
       }
-      case ProductsActionsTypes.SAVE_PRODUCT_ERROR:
+      case ProductsActionsTypes.EDIT_PRODUCT_ERROR:
         return {
           ...state,
           dataState: ProductsStateEnum.ERROR,
           errorMsg: (action as ProductsActions).payload
         }
-    default:
-      return {...state}
+  default:
+    return {...state}
   }
 }

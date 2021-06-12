@@ -23,6 +23,7 @@ export class NewProductComponent implements OnInit {
     this.store.subscribe(state => {
       this.state = state.catalogState;
       if(this.state?.dataState == ProductsStateEnum.NEW) {
+        this.submitted = false;
         this.productFormGroup = this.fb.group({
           name: ["", Validators.required],
           price: [0, Validators.required],
@@ -38,6 +39,7 @@ export class NewProductComponent implements OnInit {
   }
 
   onSaveProduct() {
+    this.submitted = true;
     this.store.dispatch(new SaveProductAction(this.productFormGroup?.value));
   }
 
