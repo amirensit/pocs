@@ -1,20 +1,21 @@
 <nav class="navbar navbar-expand-sm  bg-light navbar-dark">
   <ul class="navbar-nav">
     <li class="navbar-item">
-      <button class="btn btn-outline-info btn-sm" (click)="onGetAllProducts()">All</button>
+      <button [ngClass]="state?.currentAction?.type == ProductActions.GET_ALL_PRODUCTS_SUCCESS ? 'btn-danger' : 'btn-outline-info'" class="btn btn-sm" (click)="onGetAllProducts()">All</button>
     </li>
     <li class="navbar-item">
-      <button class="btn btn-outline-info btn-sm ml-2" (click)="onGetSelectedProducts()">Selected</button>
+      <button [ngClass]="state?.currentAction?.type == ProductActions.GET_SELECTED_PRODUCTS_SUCCESS ? 'btn-danger' : 'btn-outline-info'" class="btn btn-sm ml-2" (click)="onGetSelectedProducts()">Selected</button>
     </li>
     <li class="navbar-item">
-      <button class="btn btn-outline-info btn-sm ml-2" (click)="onNewProducts()">New Product</button>
+      <button [ngClass]="state?.currentAction?.type == ProductActions.NEW_PRODUCT ? 'btn-danger' : 'btn-outline-info'" class="btn btn-sm ml-2" (click)="onNewProducts()">New Product</button>
     </li>
   </ul>
   <ul class="navbar-nav ml-auto">
     <li>
       <form #f="ngForm" (ngSubmit)="onSearch(f.value)" class="form-inline">
         <input type="text" ngModel name="keyword"/>
-        <button type="submit" class="btn btn-outline-info btn-sm">
+        <button [ngClass]="state?.currentAction?.type == ProductActions.SEARCH_PRODUCTS_SUCCESS ? 'btn-danger' : 'btn-outline-info'"
+                type="submit" class="btn btn-sm">
           <i class="fa fa-search"></i>
           Search
         </button>
