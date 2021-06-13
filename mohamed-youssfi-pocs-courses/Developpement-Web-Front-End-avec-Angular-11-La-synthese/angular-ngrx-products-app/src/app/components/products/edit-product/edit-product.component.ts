@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { EditProductAction, UpdateProductAction } from 'src/app/ngrx/products.actions';
 import { ProductsState, ProductsStateEnum } from 'src/app/ngrx/products.reducer';
@@ -19,7 +19,7 @@ export class EditProductComponent implements OnInit {
   submitted = false;
 
   constructor(private activatedRoute: ActivatedRoute, private store: Store<any>,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.productId = Number(this.activatedRoute.snapshot.paramMap.get("id"));
@@ -47,6 +47,10 @@ export class EditProductComponent implements OnInit {
 
   get fields() {
     return this.productFormGroup?.controls;
+  }
+
+  onOkUpdate() {
+    this.router.navigate(["/products"]);
   }
 
 

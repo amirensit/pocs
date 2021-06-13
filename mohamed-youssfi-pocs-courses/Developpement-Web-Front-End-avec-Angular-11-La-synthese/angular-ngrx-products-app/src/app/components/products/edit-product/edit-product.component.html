@@ -7,9 +7,9 @@
       <ng-container *ngIf="data.dataState == ProductsStateEnum.LOADED">
         <div class="alert-success container p-3 m-3">
           <span>Product Updated Successfully</span>
-          <!-- <button class="btn btn-success ml-3 btn-sm" (click)="onNewProduct()">
-            New Product
-          </button> -->
+          <button class="btn btn-success ml-3 btn-sm" (click)="onOkUpdate()">
+            Ok
+          </button>
         </div>
       </ng-container>
       <ng-container *ngIf="data.dataState == ProductsStateEnum.EDIT">
