@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/01.framework-introductions/jpa-in-10-steps/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01.framework-introductions/jpa-in-10-steps/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/02.restful-web-services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/02.restful-web-services/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/currency-conversion-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/currency-conversion-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/currency-exchange-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/currency-exchange-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/limits-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/limits-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/netflix-eureka-naming-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/netflix-eureka-naming-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/netflix-zuul-api-gateway-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/netflix-zuul-api-gateway-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/spring-cloud-config-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03.microservices/spring-cloud-config-server/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

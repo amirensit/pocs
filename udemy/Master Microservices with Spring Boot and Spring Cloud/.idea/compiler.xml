@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="springboot-in-10-steps" />
+        <module name="jpa-in-10-steps" />
+        <module name="currency-conversion-service" />
+        <module name="netflix-eureka-naming-server" />
+        <module name="netflix-zuul-api-gateway-server" />
+        <module name="spring-cloud-config-server" />
+        <module name="restful-web-services" />
+        <module name="currency-exchange-service" />
+        <module name="limits-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="currency-conversion-service" target="1.5" />
+      <module name="currency-exchange-service" target="1.5" />
+      <module name="jpa-in-10-steps" target="1.5" />
+      <module name="limits-service" target="1.5" />
+      <module name="netflix-eureka-naming-server" target="1.5" />
+      <module name="netflix-zuul-api-gateway-server" target="1.5" />
+      <module name="restful-web-services" target="1.5" />
+      <module name="spring-cloud-config-server" target="1.5" />
+      <module name="springboot-in-10-steps" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

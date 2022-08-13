@@ -1,0 +1,23 @@
+create table customer (
+  id integer,
+  first_name varchar(255),
+  last_name varchar(255),
+  address varchar(255),
+  city varchar(255),
+  state varchar(10),
+  zipcode integer
+);
+
+create table drink_order (
+  id integer,
+  customer_id integer,
+  drink_description varchar(255)
+);
+
+insert into customer values (1, 'first_name1', 'last_name1', '34 grande rue de la guillotière', 'lyon', 'LF', '69007');
+insert into customer values (2, 'first_name2', 'last_name2', '34 grande rue de la guillotière', 'lyon', 'LF', '69007');
+insert into customer values (3, 'first_name3', 'last_name3', '34 grande rue de la guillotière', 'lyon', 'MF', '69007');
+
+insert into drink_order values (1, 1, 'this is a description');
+insert into drink_order values (2, 1, 'this is a description');
+insert into drink_order values (3, 2, 'this is a description');

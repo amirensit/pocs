@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Master Microservices with Spring Boot and Spring Cloud.iml" filepath="$PROJECT_DIR$/.idea/Master Microservices with Spring Boot and Spring Cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03.microservices/currency-conversion-service/currency-conversion-service.iml" filepath="$PROJECT_DIR$/03.microservices/currency-conversion-service/currency-conversion-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03.microservices/currency-exchange-service/currency-exchange-service.iml" filepath="$PROJECT_DIR$/03.microservices/currency-exchange-service/currency-exchange-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/01.framework-introductions/jpa-in-10-steps/jpa-in-10-steps.iml" filepath="$PROJECT_DIR$/01.framework-introductions/jpa-in-10-steps/jpa-in-10-steps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03.microservices/limits-service/limits-service.iml" filepath="$PROJECT_DIR$/03.microservices/limits-service/limits-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03.microservices/netflix-eureka-naming-server/netflix-eureka-naming-server.iml" filepath="$PROJECT_DIR$/03.microservices/netflix-eureka-naming-server/netflix-eureka-naming-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03.microservices/netflix-zuul-api-gateway-server/netflix-zuul-api-gateway-server.iml" filepath="$PROJECT_DIR$/03.microservices/netflix-zuul-api-gateway-server/netflix-zuul-api-gateway-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02.restful-web-services/restful-web-services.iml" filepath="$PROJECT_DIR$/02.restful-web-services/restful-web-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03.microservices/spring-cloud-config-server/spring-cloud-config-server.iml" filepath="$PROJECT_DIR$/03.microservices/spring-cloud-config-server/spring-cloud-config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/01.framework-introductions/springboot-in-10-steps/springboot-in-10-steps.iml" filepath="$PROJECT_DIR$/01.framework-introductions/springboot-in-10-steps/springboot-in-10-steps.iml" />
+    </modules>
+  </component>
+</project>
