@@ -1,0 +1,10 @@
+-cp
+C:\\Users\\amire\\OneDrive\\Bureau\\pocs\\my-github-pocs\\spring-native-graalvm\\Fortune\\target\\Fortune-1.0-SNAPSHOT.jar;C:\\Users\\amire\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.12.6\\jackson-core-2.12.6.jar;C:\\Users\\amire\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.12.6\\jackson-annotations-2.12.6.jar;C:\\Users\\amire\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.12.6.1\\jackson-databind-2.12.6.1.jar
+--no-fallback
+-H:Path=C:\\Users\\amire\\OneDrive\\Bureau\\pocs\\my-github-pocs\\spring-native-graalvm\\Fortune\\target
+-H:Name=fortune
+-H:Class=demo.Fortune
+-H:ConfigurationFileDirectories=C:\\Users\\amire\\OneDrive\\Bureau\\pocs\\my-github-pocs\\spring-native-graalvm\\Fortune\\target\\native\\agent-output\\main
+-H:+AllowIncompleteClasspath
+-H:ConfigurationFileDirectories=C:\\Users\\amire\\OneDrive\\Bureau\\pocs\\my-github-pocs\\spring-native-graalvm\\Fortune\\target\\native\\agent-output\\main
+-H:+AllowIncompleteClasspath
