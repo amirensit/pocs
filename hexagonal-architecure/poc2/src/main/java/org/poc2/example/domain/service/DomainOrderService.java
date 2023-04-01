@@ -6,7 +6,7 @@ import org.poc2.example.domain.repository.OrderRepository;
 
 import java.util.UUID;
 
-public class DomainOrderService implements OrderService{
+public class DomainOrderService implements OrderService {
 
     private final OrderRepository orderRepository;
 

@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * This repository package should be called port to respect hexagonal architecture
+ * This repository package should be called port to respect hexagonal architecture.
  */
 public interface OrderRepository {
     Optional<Order> findById(UUID id);
