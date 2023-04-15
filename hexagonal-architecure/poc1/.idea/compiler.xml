@@ -30,7 +30,7 @@
       <module name="domain" options="-parameters" />
       <module name="infrastructure" options="-parameters" />
       <module name="ms-launcher" options="-parameters" />
-      <module name="poc1" options="-parameters" />
+      <module name="poc1" options="" />
     </option>
   </component>
 </project>

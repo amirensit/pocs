@@ -11,7 +11,7 @@ import java.util.UUID;
 
 /**
  * This implementation stores our Order in MongoDB.
- * In an hexagonal architecture, this implementation is also an adapter.
+ * In a hexagonal architecture, this implementation is an output adapter.
  */
 @Component
 @Primary

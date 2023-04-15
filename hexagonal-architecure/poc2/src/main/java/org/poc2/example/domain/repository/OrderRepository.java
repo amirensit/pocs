@@ -7,6 +7,7 @@ import java.util.UUID;
 
 /**
  * This repository package should be called port to respect hexagonal architecture.
+ * This corresponds to output port.
  */
 public interface OrderRepository {
     Optional<Order> findById(UUID id);

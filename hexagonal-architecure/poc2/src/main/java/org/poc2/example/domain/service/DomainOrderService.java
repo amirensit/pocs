@@ -6,6 +6,13 @@ import org.poc2.example.domain.repository.OrderRepository;
 
 import java.util.UUID;
 
+
+/**
+ * In a hexagonal architecture, this service is a use case that implements the input port.
+ * Additionally, we'll not register it as a Spring bean because, from a domain perspective,
+ * this is in the inside part, and Spring configuration is on the outside.
+ * We'll manually wire it with Spring in the infrastructure layer.
+ */
 public class DomainOrderService implements OrderService {
 
     private final OrderRepository orderRepository;

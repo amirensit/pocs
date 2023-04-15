@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BookServiceImpl implements BookServicePort {
 
-    private BookPersistencePort bookPersistencePort;
+    private final BookPersistencePort bookPersistencePort;
 
     public BookServiceImpl(BookPersistencePort bookPersistencePort) {
         this.bookPersistencePort = bookPersistencePort;

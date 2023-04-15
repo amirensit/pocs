@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+/**
+ * This is input adapter that calls input port.
+ */
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
