@@ -1,10 +1,9 @@
-package com.example.hexagonal.hexademo.domain.usecases;
+package com.example.hexagonal.hexademo.domain.ports.in;
 
 import com.example.hexagonal.hexademo.domain.Student;
 
 import java.util.List;
 
-public interface StudentUseCase {
-
+public interface StudentPort {
     List<Student> getAllStudents();
 }
