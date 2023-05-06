@@ -1,4 +1,4 @@
-package com.example.hexagonal.hexademo.infrastracture.primary;
+package com.example.hexagonal.hexademo.infrastracture.in;
 
 import com.example.hexagonal.hexademo.domain.Student;
 import com.example.hexagonal.hexademo.domain.usecases.StudentUseCase;
