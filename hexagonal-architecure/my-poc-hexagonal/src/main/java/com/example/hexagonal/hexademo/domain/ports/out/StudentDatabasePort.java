@@ -7,4 +7,6 @@ import java.util.List;
 public interface StudentDatabasePort {
 
     List<Student> getAllStudents();
+
+    Student save(Student student);
 }

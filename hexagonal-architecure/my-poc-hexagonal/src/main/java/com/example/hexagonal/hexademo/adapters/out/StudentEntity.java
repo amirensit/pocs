@@ -1,13 +1,11 @@
 package com.example.hexagonal.hexademo.adapters.out;
 
 import com.example.hexagonal.hexademo.domain.Student;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -21,6 +19,11 @@ import java.util.UUID;
 public class StudentEntity {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     private UUID id;
 
     @Column
@@ -32,7 +35,7 @@ public class StudentEntity {
     @Column
     private Long age;
 
-    public static StudentEntity fromEntity(Student student) {
+    public static StudentEntity toEntity(Student student) {
         return StudentEntity
                 .builder()
                 .id(student.getId())

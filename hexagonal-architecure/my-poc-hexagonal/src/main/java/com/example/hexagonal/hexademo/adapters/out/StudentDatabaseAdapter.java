@@ -24,4 +24,11 @@ public class StudentDatabaseAdapter implements StudentDatabasePort {
                 .map(StudentEntity::toDomain)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Student save(Student student) {
+        StudentEntity studentEntity = StudentEntity.toEntity(student);
+        studentEntity = studentSpringRepository.save(studentEntity);
+        return StudentEntity.toDomain(studentEntity);
+    }
 }

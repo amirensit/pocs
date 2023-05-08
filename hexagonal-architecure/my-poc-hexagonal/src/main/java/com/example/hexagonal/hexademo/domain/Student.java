@@ -37,7 +37,7 @@ public class Student {
     }
 
     public static class Builder {
-        private UUID id;
+        private UUID id = UUID.randomUUID();
         private String firstName;
         private String lastName;
         private Long age;

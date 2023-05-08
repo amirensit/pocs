@@ -3,6 +3,7 @@ package com.example.hexagonal.hexademo.application;
 import com.example.hexagonal.hexademo.domain.Student;
 import com.example.hexagonal.hexademo.domain.ports.in.StudentPort;
 import com.example.hexagonal.hexademo.domain.usecases.StudentUseCase;
+import com.example.hexagonal.hexademo.infrastracture.in.StudentDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,5 +19,10 @@ public class StudentUseCaseImpl implements StudentUseCase {
     @Override
     public List<Student> getAllStudents() {
         return studentPort.getAllStudents();
+    }
+
+    @Override
+    public Student save(Student student) {
+        return studentPort.save(student);
     }
 }

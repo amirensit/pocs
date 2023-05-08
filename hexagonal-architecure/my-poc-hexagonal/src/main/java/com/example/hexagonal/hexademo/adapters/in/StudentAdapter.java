@@ -23,4 +23,9 @@ public class StudentAdapter implements StudentPort {
     public List<Student> getAllStudents() {
         return studentDatabasePort.getAllStudents();
     }
+
+    @Override
+    public Student save(Student student) {
+        return studentDatabasePort.save(student);
+    }
 }
