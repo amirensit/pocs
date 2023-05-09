@@ -21,7 +21,7 @@ public class StudentDTO {
     private final String lastName;
     private final Long age;
 
-    public static Student to(StudentDTO studentDTO) {
+    public static Student toDomain(StudentDTO studentDTO) {
         return Student
                 .builder()
                 .id(studentDTO.getId())
@@ -31,7 +31,7 @@ public class StudentDTO {
                 .build();
     }
 
-    public static StudentDTO from(Student student) {
+    public static StudentDTO ToDTO(Student student) {
         return StudentDTO
                 .builder()
                 .id(student.getId())
@@ -41,17 +41,17 @@ public class StudentDTO {
                 .build();
     }
 
-    public static List<Student> to(List<StudentDTO> studentDTOList) {
+    public static List<Student> toDomains(List<StudentDTO> studentDTOList) {
         return studentDTOList
                 .stream()
-                .map(StudentDTO::to)
+                .map(StudentDTO::toDomain)
                 .collect(Collectors.toList());
     }
 
-    public static List<StudentDTO> from(List<Student> studentDTOList) {
+    public static List<StudentDTO> ToDTOs(List<Student> studentDTOList) {
         return studentDTOList
                 .stream()
-                .map(StudentDTO::from)
+                .map(StudentDTO::ToDTO)
                 .collect(Collectors.toList());
     }
 }
