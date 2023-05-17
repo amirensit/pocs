@@ -31,7 +31,7 @@ public class StudentDTO {
                 .build();
     }
 
-    public static StudentDTO ToDTO(Student student) {
+    public static StudentDTO toDTO(Student student) {
         return StudentDTO
                 .builder()
                 .id(student.getId())
@@ -51,7 +51,7 @@ public class StudentDTO {
     public static List<StudentDTO> ToDTOs(List<Student> studentDTOList) {
         return studentDTOList
                 .stream()
-                .map(StudentDTO::ToDTO)
+                .map(StudentDTO::toDTO)
                 .collect(Collectors.toList());
     }
 }

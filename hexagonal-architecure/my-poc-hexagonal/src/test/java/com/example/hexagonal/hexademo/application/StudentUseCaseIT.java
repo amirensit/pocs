@@ -1,36 +1,29 @@
-package com.example.hexagonal.hexademo.adapters.in;
+package com.example.hexagonal.hexademo.application;
 
-import com.example.hexagonal.hexademo.adapters.out.StudentDatabaseAdapter;
 import com.example.hexagonal.hexademo.adapters.out.StudentEntity;
 import com.example.hexagonal.hexademo.adapters.out.StudentSpringRepository;
 import com.example.hexagonal.hexademo.domain.Student;
-import com.example.hexagonal.hexademo.domain.ports.in.StudentPort;
-import com.example.hexagonal.hexademo.domain.ports.out.StudentDatabasePort;
+import com.example.hexagonal.hexademo.domain.usecases.StudentUseCase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
-@DataJpaTest
-class StudentAdapterIT {
+@SpringBootTest
+class StudentUseCaseIT {
 
     @Autowired
     StudentSpringRepository studentSpringRepository;
 
     @Autowired
-    StudentDatabasePort studentDatabasePort;
-
-    @Autowired
-    StudentPort studentPort;
+    StudentUseCase studentUseCase;
 
     @Test
     @Sql("classpath:config/insert-data-student.sql")
     void should_return_all_students() {
         Assertions.assertThat(studentSpringRepository.findAll()).hasSize(1);
-        var students = studentPort.getAllStudents();
+        var students = studentUseCase.getAllStudents();
         Assertions.assertThat(students).isNotNull();
         Assertions.assertThat(students).hasSize(1);
         Assertions.assertThat(students.get(0).getAge()).isEqualTo(28L);
@@ -39,9 +32,9 @@ class StudentAdapterIT {
     }
 
     @Test
-    void should_save_Student() {
+    void should_save_student() {
         Assertions.assertThat(studentSpringRepository.findAll()).hasSize(0);
-        var student = studentPort.save(
+        var student = studentUseCase.save(
                 Student.builder()
                         .firstName("amir")
                         .lastName("choubani")
@@ -54,20 +47,5 @@ class StudentAdapterIT {
         Assertions.assertThat(actualOptional.isPresent()).isTrue();
         var actual = actualOptional.get();
         Assertions.assertThat(expected).isEqualTo(actual);
-    }
-
-    @TestConfiguration
-    public static class StudentAdapterConfig {
-
-        @Bean
-        StudentDatabasePort studentDatabasePort(StudentSpringRepository studentSpringRepository) {
-            return new StudentDatabaseAdapter(studentSpringRepository);
-        }
-
-        @Bean
-        StudentPort studentPort(StudentDatabasePort studentDatabasePort) {
-            return new StudentAdapter(studentDatabasePort);
-        }
-
     }
 }

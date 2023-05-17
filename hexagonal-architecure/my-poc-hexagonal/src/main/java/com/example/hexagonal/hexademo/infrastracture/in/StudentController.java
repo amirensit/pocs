@@ -32,7 +32,7 @@ public class StudentController {
         Student result = studentUseCase.save(student);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(StudentDTO.ToDTO(result));
+                .body(StudentDTO.toDTO(result));
     }
      @PutMapping("/edit/{id}")
     public ResponseEntity<StudentDTO> edit(@PathVariable("id")UUID id, @RequestBody StudentDTO studentDTO) {
@@ -41,6 +41,6 @@ public class StudentController {
         Student result = studentUseCase.save(student);
          return ResponseEntity
                  .ok()
-                 .body(StudentDTO.ToDTO(result));
+                 .body(StudentDTO.toDTO(result));
      }
 }
