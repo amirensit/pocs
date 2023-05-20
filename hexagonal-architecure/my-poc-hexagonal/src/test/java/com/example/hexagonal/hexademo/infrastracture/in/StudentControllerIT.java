@@ -12,8 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -43,7 +42,7 @@ class StudentControllerIT {
         mockMvc
                 .perform(get("/api/students/get-all"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].firstName").value("firstName"))
                 .andExpect(jsonPath("$[0].lastName").value("lastName"))
                 .andExpect(jsonPath("$[0].age").value(28L));
@@ -60,7 +59,7 @@ class StudentControllerIT {
         mockMvc
                 .perform(
                         post("/api/students/add")
-                                .contentType("application/json")
+                                .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(student)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstName").value("firstName"))
@@ -69,6 +68,34 @@ class StudentControllerIT {
     }
 
     @Test
-    void edit() {
+    void should_edit_student() throws Exception {
+        var student = Student
+                .builder()
+                .firstName("firstName")
+                .lastName("lastName")
+                .age(28L)
+                .build();
+
+        student = studentUseCase.save(student);
+        StudentDTO studentDTO = StudentDTO
+                .builder()
+                .id(student.getId())
+                .firstName("new-firstName")
+                .lastName("new-lastName")
+                .age(29L)
+                .build();
+        mockMvc
+                .perform(
+                        put("/api/students/edit/{id}", student.getId())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(studentDTO))
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.firstName").value("new-firstName"))
+                .andExpect(jsonPath("$.lastName").value("new-lastName"))
+                .andExpect(jsonPath("$.age").value(29L));
+        Assertions.assertThat(studentUseCase.getAllStudents()).hasSize(1);
+
     }
 }

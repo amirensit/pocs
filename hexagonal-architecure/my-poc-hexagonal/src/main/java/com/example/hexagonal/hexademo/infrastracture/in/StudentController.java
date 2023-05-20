@@ -34,7 +34,7 @@ public class StudentController {
                 .status(HttpStatus.CREATED)
                 .body(StudentDTO.toDTO(result));
     }
-     @PutMapping("/edit/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<StudentDTO> edit(@PathVariable("id")UUID id, @RequestBody StudentDTO studentDTO) {
         // TODO: exception handling will be treated soon.
         Student student = StudentDTO.toDomain(studentDTO);
@@ -42,5 +42,5 @@ public class StudentController {
          return ResponseEntity
                  .ok()
                  .body(StudentDTO.toDTO(result));
-     }
+    }
 }
