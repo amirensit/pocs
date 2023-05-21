@@ -2,6 +2,7 @@ package com.example.hexagonal.hexademo.infrastracture.in;
 
 import com.example.hexagonal.hexademo.domain.Student;
 import com.example.hexagonal.hexademo.domain.usecases.StudentUseCase;
+import com.example.hexagonal.hexademo.errors.domain.Assert;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class StudentController {
 
     @PostMapping("/add")
     public ResponseEntity<StudentDTO> add(@RequestBody StudentDTO studentDTO) {
+        Assert.notNull("firstName", studentDTO.getFirstName());
         Student student = StudentDTO.toDomain(studentDTO);
         Student result = studentUseCase.save(student);
         return ResponseEntity
