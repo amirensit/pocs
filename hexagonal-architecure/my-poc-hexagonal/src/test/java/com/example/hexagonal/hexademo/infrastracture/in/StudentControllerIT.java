@@ -50,7 +50,7 @@ class StudentControllerIT {
 
     @Test
     void should_add_student() throws Exception {
-        Student student = Student
+        StudentDTO studentDTO = StudentDTO
                 .builder()
                 .firstName("firstName")
                 .lastName("lastName")
@@ -58,9 +58,10 @@ class StudentControllerIT {
 
         mockMvc
                 .perform(
-                        post("/api/students/add")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(student)))
+                    post("/api/students/add")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(studentDTO))
+                )
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstName").value("firstName"))
                 .andExpect(jsonPath("$.lastName").value("lastName"));
