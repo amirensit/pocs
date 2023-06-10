@@ -1,7 +1,6 @@
 package com.example.hexagonal.hexademo.infrastracture.in;
 
 import com.example.hexagonal.hexademo.domain.Student;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +10,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Builder
-@AllArgsConstructor
 @Getter
 @Setter
 public class StudentDTO {
