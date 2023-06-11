@@ -66,4 +66,44 @@ class StudentControllerStandaloneIT {
                 .isEqualTo(objectMapper.createObjectNode().put("firstName", "firstName.null"));
     }
 
+    @Test
+    void givenEmptyAttribute_when_add_should_throw_exception() throws Exception {
+        StudentDTO studentDTO = StudentDTO
+                .builder()
+                .firstName("")
+                .build();
+        MvcResult mvcResult = mockMvc
+                .perform(
+                        post("/api/students/add")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(studentDTO))
+                )
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+                .andReturn();
+        JsonNode resultJsonNode = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), JsonNode.class);
+        Assertions.assertThat(resultJsonNode.get("errors"))
+                .isEqualTo(objectMapper.createObjectNode().put("firstName", "firstName.blank"));
+    }
+
+    @Test
+    void givenWhiteSpacedAttribute_when_add_should_throw_exception() throws Exception {
+        StudentDTO studentDTO = StudentDTO
+                .builder()
+                .firstName("  ")
+                .build();
+        MvcResult mvcResult = mockMvc
+                .perform(
+                        post("/api/students/add")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(studentDTO))
+                )
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+                .andReturn();
+        JsonNode resultJsonNode = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), JsonNode.class);
+        Assertions.assertThat(resultJsonNode.get("errors"))
+                .isEqualTo(objectMapper.createObjectNode().put("firstName", "firstName.blank"));
+    }
+
 }

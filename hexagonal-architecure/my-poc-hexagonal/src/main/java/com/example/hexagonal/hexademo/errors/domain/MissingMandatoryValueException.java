@@ -10,6 +10,10 @@ public class MissingMandatoryValueException extends AssertionException {
     return new MissingMandatoryValueException(fieldName, errorCode, defaultMessage(fieldName, "null"));
   }
 
+  public static MissingMandatoryValueException forBlankValue(String field, String errorCode) {
+    return new MissingMandatoryValueException(field, errorCode, defaultMessage(field, "blank"));
+  }
+
   private static String defaultMessage(String field, String reason) {
     return new StringBuilder()
       .append("The field \"")

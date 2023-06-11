@@ -30,6 +30,7 @@ public class StudentController {
     @PostMapping("/add")
     public ResponseEntity<StudentDTO> add(@RequestBody StudentDTO studentDTO) {
         Assert.notNull("firstName", studentDTO.getFirstName());
+        Assert.notBlank("firstName", studentDTO.getFirstName());
         Student student = StudentDTO.toDomain(studentDTO);
         Student result = studentUseCase.save(student);
         return ResponseEntity
