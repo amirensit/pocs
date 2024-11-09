@@ -85,6 +85,12 @@
         "staticFilePath": "dist/apps/app-1/browser",
         "spa": true
       }
+    },
+    "echo": {
+      "executor": "@plain/my-plugin:echo",
+      "options": {
+        "textToEcho": "hello from my first executor testing"
+      }
     }
   }
 }
